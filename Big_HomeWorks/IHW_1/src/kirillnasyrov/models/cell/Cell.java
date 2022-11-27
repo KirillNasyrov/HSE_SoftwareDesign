@@ -8,9 +8,9 @@ public class Cell {
     private boolean emptiness;
     private Chip chip;
 
-    public Cell(char arg1, int arg2) {
-        setLetter(arg1);
-        setNumber(arg2);
+    public Cell(char letter, int number) {
+        setLetter(letter);
+        setNumber(number);
         emptiness = true;
         chip = null;
     }

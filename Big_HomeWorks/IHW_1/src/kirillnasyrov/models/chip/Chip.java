@@ -3,12 +3,12 @@ package kirillnasyrov.models.chip;
 public class Chip {
     private Color color;
 
-    public Chip(String arg) {
-        color = arg.equals("white") ? Color.White : Color.Black;
+    public Chip(Color value) {
+        color = value == Color.White ? Color.White : Color.Black;
     }
 
-    public String getColor() {
-        return color.toString();
+    public Color getColor() {
+        return color;
     }
 
     public void changeColor() {
