@@ -11,7 +11,11 @@ import kirillnasyrov.models.player.Player;
 import kirillnasyrov.models.chip.Color;
 import kirillnasyrov.view.ConsolePainter;
 
+import java.util.Stack;
+
 public class GameHandler {
+    public static Stack<Game> stackOfGames = new Stack<Game>();
+
     public static void chooseMode(Game game) {
         game.setGameMode(ConsoleReader.getGameMode());
     }
@@ -207,6 +211,7 @@ public class GameHandler {
         while (!game.isOver()) {
             if (game.getPlayerForBlack().canMove()) {
                 findCellsCanBeChosen(game, game.getPlayerForBlack());
+                stackOfGames.push(new Game(game));
                 ConsolePainter.paintGameBoard(game.getGameBoard());
                 Cell chosenCell;
                 while (true) {
@@ -227,6 +232,7 @@ public class GameHandler {
                 game.getPlayerForWhite().setPossibilityToMove(true);
             } else {
                 findCellsCanBeChosen(game, game.getPlayerForWhite());
+                stackOfGames.push(new Game(game));
                 ConsolePainter.paintGameBoard(game.getGameBoard());
                 Cell chosenCell;
                 while (true) {
@@ -250,11 +256,15 @@ public class GameHandler {
         ConsolePainter.paintGameBoard(game.getGameBoard());
         System.out.println("Игра завершена.");
         if (game.getGameBoard().getNumberOfBlack() > game.getGameBoard().getNumberOfWhite()) {
-            System.out.println("Победил игрок с чёрными фишками.");
+            System.out.println("Победил игрок с чёрными фишками. " + game.getGameBoard().getNumberOfBlack() + " очков.");
         } else if (game.getGameBoard().getNumberOfBlack() < game.getGameBoard().getNumberOfWhite()) {
-            System.out.println("Победил игрок с белыми фишками.");
+            if (game.getGameMode() != GameMode.PlayerVsPlayer) {
+                System.out.println("Победил компьютер с белыми фишками. " + game.getGameBoard().getNumberOfWhite() + " очков.");
+            } else {
+                System.out.println("Победил игрок с белыми фишками. " + game.getGameBoard().getNumberOfWhite() + " очков.");
+            }
         } else {
-            System.out.println("Ничья.");
+            System.out.println("Ничья." + game.getGameBoard().getNumberOfBlack() + " очков у каждого.");
         }
     }
 

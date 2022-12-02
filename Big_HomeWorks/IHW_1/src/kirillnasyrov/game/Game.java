@@ -16,6 +16,13 @@ public class Game {
         gameBoard = new GameBoard();
     }
 
+    public Game(Game game) {
+        playerForBlack = new Player(game.getPlayerForBlack());
+        playerForWhite = new Player(game.getPlayerForWhite());
+        gameMode = game.getGameMode();
+        gameBoard = new GameBoard(game.getGameBoard());
+    }
+
     public void setGameMode(GameMode gameMode) {
         this.gameMode = gameMode;
     }

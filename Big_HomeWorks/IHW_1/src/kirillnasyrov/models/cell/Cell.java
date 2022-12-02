@@ -16,6 +16,14 @@ public class Cell {
         chip = null;
     }
 
+    public Cell(Cell cell) {
+        letter = cell.getLetter();
+        number = cell.getNumber();
+        emptiness = cell.isEmpty();
+        chip = cell.isEmpty() ? null : new Chip(cell.getChip().getColor());
+        possibilityForChoice = cell.canBeChosen();
+    }
+
     public void setLetter(char value) {
         if (value < 'a' || value > 'h') {
             throw new IllegalArgumentException("Wrong letter");

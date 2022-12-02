@@ -13,6 +13,12 @@ public class GameBoard {
         numberOfWhite = 2;
     }
 
+    public GameBoard(GameBoard gameBoard) {
+        numberOfBlack = gameBoard.getNumberOfBlack();
+        numberOfWhite = gameBoard.getNumberOfWhite();
+        field = new Field(gameBoard.getField());
+    }
+
     public Field getField() {
         return field;
     }
