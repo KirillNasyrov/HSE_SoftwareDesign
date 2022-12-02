@@ -247,7 +247,15 @@ public class GameHandler {
                 game.getPlayerForBlack().setPossibilityToMove(true);
             }
         }
+        ConsolePainter.paintGameBoard(game.getGameBoard());
         System.out.println("Игра завершена.");
+        if (game.getGameBoard().getNumberOfBlack() > game.getGameBoard().getNumberOfWhite()) {
+            System.out.println("Победил игрок с чёрными фишками.");
+        } else if (game.getGameBoard().getNumberOfBlack() < game.getGameBoard().getNumberOfWhite()) {
+            System.out.println("Победил игрок с белыми фишками.");
+        } else {
+            System.out.println("Ничья.");
+        }
     }
 
 
