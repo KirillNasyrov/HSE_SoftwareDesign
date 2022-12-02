@@ -32,7 +32,7 @@ public class Player {
             possibilityToMove = !possibilityToMove;
             return game.getGameBoard().getField().getCell(number, letter);
         } else {
-            throw new RuntimeException("Ошибка. Неверный выбор клетки.");
+            throw new RuntimeException("Ошибка. Неверный выбор клетки");
         }
     }
 

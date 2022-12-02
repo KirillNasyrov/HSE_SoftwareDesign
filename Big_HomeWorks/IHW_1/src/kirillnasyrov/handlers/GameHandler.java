@@ -17,6 +17,7 @@ public class GameHandler {
     }
 
     public static void findCellsCanBeChosen(Game game, Player player) {
+        makeCellsUsual(game);
         for (int number = 1; number <= 8; ++number) {
             for (char letter = 'a'; letter <= 'h'; ++letter) {
                 if (!game.getGameBoard().getField().getCell(number, letter).isEmpty()) {
@@ -261,7 +262,6 @@ public class GameHandler {
                 }
             }
         }
-        makeCellsUsual(game);
         return sum;
     }
 
