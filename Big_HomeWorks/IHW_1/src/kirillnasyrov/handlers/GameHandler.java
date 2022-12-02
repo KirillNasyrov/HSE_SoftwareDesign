@@ -1,8 +1,8 @@
 package kirillnasyrov.handlers;
 
-import kirillnasyrov.ConsoleReader;
-import kirillnasyrov.Game;
-import kirillnasyrov.GameMode;
+import kirillnasyrov.models.consoleworker.ConsoleReader;
+import kirillnasyrov.game.Game;
+import kirillnasyrov.game.GameMode;
 import kirillnasyrov.models.cell.Cell;
 import kirillnasyrov.models.chip.Chip;
 import kirillnasyrov.models.field.Field;

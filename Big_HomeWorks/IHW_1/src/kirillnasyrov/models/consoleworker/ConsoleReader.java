@@ -1,4 +1,6 @@
-package kirillnasyrov;
+package kirillnasyrov.models.consoleworker;
+
+import kirillnasyrov.game.GameMode;
 
 import java.util.Scanner;
 

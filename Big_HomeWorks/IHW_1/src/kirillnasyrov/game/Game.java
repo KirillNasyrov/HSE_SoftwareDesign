@@ -1,4 +1,4 @@
-package kirillnasyrov;
+package kirillnasyrov.game;
 
 import kirillnasyrov.handlers.GameHandler;
 import kirillnasyrov.models.gameboard.GameBoard;

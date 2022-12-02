@@ -1,7 +1,7 @@
 package kirillnasyrov.models.player;
 
-import kirillnasyrov.Game;
-import kirillnasyrov.GameMode;
+import kirillnasyrov.game.Game;
+import kirillnasyrov.game.GameMode;
 import kirillnasyrov.handlers.GameHandler;
 import kirillnasyrov.models.cell.Cell;
 import kirillnasyrov.models.chip.Color;
@@ -19,8 +19,12 @@ public class Computer extends Player {
         if (gameMode == GameMode.Easy) {
             return chooseTheCellAtEasyMode(game);
         } else {
-            return null;
+            return chooseTheCellAtHardMode(game);
         }
+    }
+
+    public Cell chooseTheCellAtHardMode(Game game) {
+        return null;
     }
 
     public Cell chooseTheCellAtEasyMode(Game game) {

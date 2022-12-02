@@ -1,7 +1,7 @@
 package kirillnasyrov.models.player;
 
-import kirillnasyrov.ConsoleReader;
-import kirillnasyrov.Game;
+import kirillnasyrov.models.consoleworker.ConsoleReader;
+import kirillnasyrov.game.Game;
 import kirillnasyrov.handlers.GameHandler;
 import kirillnasyrov.models.cell.Cell;
 import kirillnasyrov.models.chip.Color;

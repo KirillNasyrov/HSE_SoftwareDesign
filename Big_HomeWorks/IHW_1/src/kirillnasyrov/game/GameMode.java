@@ -1,4 +1,4 @@
-package kirillnasyrov;
+package kirillnasyrov.game;
 
 public enum GameMode {
     Easy,

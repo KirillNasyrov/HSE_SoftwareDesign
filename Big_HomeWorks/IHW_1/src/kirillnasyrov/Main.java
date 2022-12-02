@@ -1,5 +1,6 @@
 package kirillnasyrov;
 
+import kirillnasyrov.game.Game;
 import kirillnasyrov.handlers.GameHandler;
 
 public class Main {
