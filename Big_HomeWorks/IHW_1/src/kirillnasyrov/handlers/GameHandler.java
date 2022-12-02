@@ -294,7 +294,7 @@ public class GameHandler {
 
         //1
         char iteratorLetter = cell.getLetter();
-        int iteratorNumber = cell.getNumber();
+        int iteratorNumber;
         --iteratorLetter;
         while (iteratorLetter >= 'a') {
             if (!game.getGameBoard().getField().getCell(number, iteratorLetter).isEmpty()) {
@@ -312,7 +312,7 @@ public class GameHandler {
                             }
                             game.getGameBoard().getField().getCell(number, i).getChip().changeColor();
                         } else {
-                            if (number == 1 || number == 8 || i == 'a' || i == 'h') {
+                            if (number == 1 || number == 8 || i == 'h') {
                                 sum += 2;
                             } else {
                                 ++sum;
@@ -350,7 +350,7 @@ public class GameHandler {
                             }
                             game.getGameBoard().getField().getCell(i, j).getChip().changeColor();
                         } else {
-                            if (i == 1 || i == 8 || j == 'a' || j == 'h') {
+                            if (i == 8 || j == 'h') {
                                 sum += 2;
                             } else {
                                 ++sum;
@@ -385,7 +385,7 @@ public class GameHandler {
                             }
                             game.getGameBoard().getField().getCell(i, letter).getChip().changeColor();
                         } else {
-                            if (i == 1 || i == 8 || letter == 'a' || letter == 'h') {
+                            if (i == 8 || letter == 'a' || letter == 'h') {
                                 sum += 2;
                             } else {
                                 ++sum;
@@ -424,7 +424,7 @@ public class GameHandler {
                             }
                             game.getGameBoard().getField().getCell(i, j).getChip().changeColor();
                         } else {
-                            if (i == 1 || i == 8 || j == 'a' || j == 'h') {
+                            if ( i == 8 || j == 'a') {
                                 sum += 2;
                             } else {
                                 ++sum;
@@ -458,7 +458,7 @@ public class GameHandler {
                             }
                             game.getGameBoard().getField().getCell(number, j).getChip().changeColor();
                         } else {
-                            if (number == 1 || number == 8 || j == 'a' || j == 'h') {
+                            if (number == 1 || number == 8 || j == 'a') {
                                 sum += 2;
                             } else {
                                 ++sum;
@@ -496,7 +496,7 @@ public class GameHandler {
                             }
                             game.getGameBoard().getField().getCell(i, j).getChip().changeColor();
                         } else {
-                            if (i == 1 || i == 8 || j == 'a' || j == 'h') {
+                            if (i == 1 || j == 'a') {
                                 sum += 2;
                             } else {
                                 ++sum;
@@ -530,7 +530,7 @@ public class GameHandler {
                             }
                             game.getGameBoard().getField().getCell(i, letter).getChip().changeColor();
                         } else {
-                            if (i == 1 || i == 8 || letter == 'a' || letter == 'h') {
+                            if (i == 1 || letter == 'a' || letter == 'h') {
                                 sum += 2;
                             } else {
                                 ++sum;
@@ -568,7 +568,7 @@ public class GameHandler {
                             }
                             game.getGameBoard().getField().getCell(i, j).getChip().changeColor();
                         } else {
-                            if (i == 1 || i == 8 || j == 'a' || j == 'h') {
+                            if (i == 1 || j == 'h') {
                                 sum += 2;
                             } else {
                                 ++sum;
