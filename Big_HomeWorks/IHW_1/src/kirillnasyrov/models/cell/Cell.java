@@ -7,8 +7,9 @@ public class Cell {
     private int number;
     private boolean emptiness;
     private Chip chip;
+    private boolean possibilityForChoice;
 
-    public Cell(char letter, int number) {
+    public Cell(int number, char letter) {
         setLetter(letter);
         setNumber(number);
         emptiness = true;
@@ -40,11 +41,28 @@ public class Cell {
     }
 
     public int getNumber() {
-        return number;
+
+        return this.number;
     }
 
     public void setChip(Chip chip) {
         this.chip = chip;
         emptiness = false;
+    }
+
+    public Chip getChip() {
+        if (!isEmpty()) {
+            return chip;
+        } else {
+            throw new RuntimeException("клетка пустая");
+        }
+    }
+
+    public void setPossibilityForChoice(boolean possibilityForChoice) {
+        this.possibilityForChoice = possibilityForChoice;
+    }
+
+    public boolean canBeChosen() {
+        return possibilityForChoice;
     }
 }

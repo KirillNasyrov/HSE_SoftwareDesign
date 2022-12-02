@@ -1,19 +1,38 @@
 package kirillnasyrov.view;
 
-
-import kirillnasyrov.models.field.Field;
+import kirillnasyrov.models.gameboard.GameBoard;
+import kirillnasyrov.models.chip.Color;
 
 public class ConsolePainter {
-    public static void repaint(Field field) {
-        for (int i = 0; i < 8; ++i) {
-            System.out.println("---------------------------------");
-            for (int j = 0; j < 8; ++j) {
-                if (field.getCell((char)(97 + i), j + 1).isEmpty()) {
-                    System.out.print("|   ");
+    public static void paintGameBoard(GameBoard board) {
+        for (int number = 1; number <= 8; ++number) {
+            System.out.println("   -------------------------------------------------");
+            System.out.print(" " + number + " ");
+            for (char letter = 'a'; letter <= 'h'; ++letter) {
+                if (board.getField().getCell(number, letter).isEmpty()) {
+                    if (board.getField().getCell(number, letter).canBeChosen()) {
+                        System.out.print("|  ◌  ");
+                    }
+                    else {
+                        System.out.print("|     ");
+                    }
+                } else {
+                    if (board.getField().getCell(number, letter).getChip().getColor() == Color.White) {
+                        System.out.print("|  ●  ");
+                    } else {
+                        System.out.print("|  ○  ");
+                    }
                 }
             }
-            System.out.println("|");
+            if (number == 4) {
+                System.out.println("|   " + "white: " + board.getNumberOfWhite());
+            } else if (number == 5) {
+                System.out.println("|   " + "black: " + board.getNumberOfBlack());
+            } else {
+                System.out.println("|");
+            }
         }
-        System.out.println("---------------------------------");
+        System.out.println("   -------------------------------------------------");
+        System.out.println("      a     b     c     d     e     f     g     h   \n");
     }
 }

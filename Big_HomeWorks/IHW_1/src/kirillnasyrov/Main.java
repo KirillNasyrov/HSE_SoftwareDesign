@@ -1,12 +1,12 @@
 package kirillnasyrov;
 
-import kirillnasyrov.models.field.Field;
-import kirillnasyrov.view.ConsolePainter;
+import kirillnasyrov.handlers.GameHandler;
 
 public class Main {
 
     public static void main(String[] args) {
-        Field field = new Field();
-        ConsolePainter.repaint(field);
+        Game game = new Game();
+        GameHandler.chooseMode(game);
+        GameHandler.startGame(game);
     }
 }
