@@ -14,7 +14,8 @@ import kirillnasyrov.view.ConsolePainter;
 import java.util.Stack;
 
 public class GameHandler {
-    public static Stack<Game> stackOfGames = new Stack<Game>();
+    public static Stack<Game> stackOfGames = new Stack<>();
+    private static int maxNumberOfPoints = 0;
 
     public static void chooseMode(Game game) {
         game.setGameMode(ConsoleReader.getGameMode());
@@ -211,8 +212,19 @@ public class GameHandler {
         while (!game.isOver()) {
             if (game.getPlayerForBlack().canMove()) {
                 findCellsCanBeChosen(game, game.getPlayerForBlack());
-                stackOfGames.push(new Game(game));
                 ConsolePainter.paintGameBoard(game.getGameBoard());
+                if (game.getGameMode() != GameMode.PlayerVsPlayer) {
+                    int move = game.getPlayerForBlack().chooseTheMove();
+                    if (move == 2) {
+                        try {
+                            game = game.getPlayerForBlack().undoMove();
+                            ConsolePainter.paintGameBoard(game.getGameBoard());
+                        } catch (RuntimeException exception) {
+                            System.out.println(exception.getMessage());
+                        }
+                    }
+                }
+                stackOfGames.push(new Game(game));
                 Cell chosenCell;
                 while (true) {
                     try {
@@ -257,15 +269,25 @@ public class GameHandler {
         System.out.println("Игра завершена.");
         if (game.getGameBoard().getNumberOfBlack() > game.getGameBoard().getNumberOfWhite()) {
             System.out.println("Победил игрок с чёрными фишками. " + game.getGameBoard().getNumberOfBlack() + " очков.");
+            if (game.getGameBoard().getNumberOfBlack() > maxNumberOfPoints) {
+                maxNumberOfPoints = game.getGameBoard().getNumberOfBlack();
+            }
         } else if (game.getGameBoard().getNumberOfBlack() < game.getGameBoard().getNumberOfWhite()) {
             if (game.getGameMode() != GameMode.PlayerVsPlayer) {
                 System.out.println("Победил компьютер с белыми фишками. " + game.getGameBoard().getNumberOfWhite() + " очков.");
             } else {
                 System.out.println("Победил игрок с белыми фишками. " + game.getGameBoard().getNumberOfWhite() + " очков.");
+                if (game.getGameBoard().getNumberOfWhite() > maxNumberOfPoints) {
+                    maxNumberOfPoints = game.getGameBoard().getNumberOfWhite();
+                }
             }
         } else {
             System.out.println("Ничья." + game.getGameBoard().getNumberOfBlack() + " очков у каждого.");
+            if (game.getGameBoard().getNumberOfBlack() > maxNumberOfPoints) {
+                maxNumberOfPoints = game.getGameBoard().getNumberOfBlack();
+            }
         }
+        System.out.println("Максимально большое количество очков, полученные выигравшим человеком: " + maxNumberOfPoints);
     }
 
 

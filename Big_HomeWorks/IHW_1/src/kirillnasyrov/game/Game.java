@@ -2,13 +2,14 @@ package kirillnasyrov.game;
 
 import kirillnasyrov.handlers.GameHandler;
 import kirillnasyrov.models.gameboard.GameBoard;
+import kirillnasyrov.models.player.Computer;
 import kirillnasyrov.models.player.Player;
 
 public class Game {
     private Player playerForWhite;
     private Player playerForBlack;
     private GameMode gameMode;
-    private GameBoard gameBoard;
+    private final GameBoard gameBoard;
 
     public Game() {
         playerForBlack = null;
@@ -18,7 +19,7 @@ public class Game {
 
     public Game(Game game) {
         playerForBlack = new Player(game.getPlayerForBlack());
-        playerForWhite = new Player(game.getPlayerForWhite());
+        playerForWhite = game.getGameMode() != GameMode.PlayerVsPlayer ? new Computer(game.getPlayerForWhite()) : new Player(game.getPlayerForWhite());
         gameMode = game.getGameMode();
         gameBoard = new GameBoard(game.getGameBoard());
     }

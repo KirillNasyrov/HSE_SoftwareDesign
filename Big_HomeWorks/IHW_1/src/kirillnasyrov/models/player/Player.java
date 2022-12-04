@@ -23,6 +23,19 @@ public class Player {
         possibilityToMove = player.canMove();
     }
 
+    public final int chooseTheMove() {
+        return ConsoleReader.getNumberOfMove();
+    }
+
+    public final Game undoMove() {
+        if (!GameHandler.stackOfGames.isEmpty()) {
+            GameHandler.stackOfGames.pop();
+            return GameHandler.stackOfGames.pop();
+        } else {
+            throw new RuntimeException("Вы ни разу не сходили");
+        }
+    }
+
     public Cell chooseTheCell(Game game) {
         String message = color == Color.Black ? "Ходит игрок у которого черные фишки." : "Ходит игрок у которого белые фишки.";
         System.out.println(message);

@@ -8,11 +8,16 @@ import kirillnasyrov.models.chip.Chip;
 import kirillnasyrov.models.chip.Color;
 
 public class Computer extends Player {
-    private GameMode gameMode;
+    private final GameMode gameMode;
 
     public Computer(Color color, GameMode gameMode) {
         super(color);
         this.gameMode = gameMode;
+    }
+
+    public Computer(Player player) {
+        super(player.color);
+        gameMode = ((Computer)player).getGameMode();
     }
 
     @Override
@@ -77,5 +82,9 @@ public class Computer extends Player {
         }
         possibilityToMove = !possibilityToMove;
         return cellShouldBeChosen;
+    }
+
+    public GameMode getGameMode() {
+        return gameMode;
     }
 }

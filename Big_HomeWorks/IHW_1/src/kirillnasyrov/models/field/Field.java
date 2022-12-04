@@ -31,8 +31,4 @@ public class Field {
 
         return field[number - 1][(int) letter - 97];
     }
-
-    public void setCell(Cell cell) {
-        field[cell.getNumber() - 1][(int) cell.getLetter() - 97] = cell;
-    }
 }

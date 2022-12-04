@@ -34,5 +34,15 @@ public class ConsolePainter {
         }
         System.out.println("   ---------------------------------------------------");
         System.out.println("      a     b     c     d     e     f     g     h   \n");
+        System.out.print("Возможные ходы: [ ");
+
+        for (int i = 1; i <= 8; ++i) {
+            for (char j = 'a'; j <= 'h'; ++j) {
+                if (board.getField().getCell(i, j).canBeChosen()) {
+                    System.out.print(String.valueOf(i) + j + " ");
+                }
+            }
+        }
+        System.out.println(" ]");
     }
 }
