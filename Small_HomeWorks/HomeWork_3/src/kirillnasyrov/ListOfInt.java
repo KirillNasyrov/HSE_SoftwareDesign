@@ -104,7 +104,7 @@ public class ListOfInt implements IntegerList{
      */
     @Override
     public Integer remove(int index) {
-        return null;
+        return list.remove(index);
     }
 
     /**
@@ -126,7 +126,7 @@ public class ListOfInt implements IntegerList{
      */
     @Override
     public int indexOf(Integer o) {
-        return 0;
+        return list.indexOf(o);
     }
 
     /**
@@ -153,7 +153,7 @@ public class ListOfInt implements IntegerList{
      */
     @Override
     public boolean add(Integer e) {
-        return false;
+        return list.add(e);
     }
 
     /**
@@ -179,6 +179,6 @@ public class ListOfInt implements IntegerList{
      */
     @Override
     public boolean remove(Integer o) {
-        return false;
+        return list.remove(o);
     }
 }

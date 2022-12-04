@@ -3,6 +3,7 @@ package kirillnasyrov;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        ListOfInt list = new ListOfInt();
+        list.add(5);
     }
 }
