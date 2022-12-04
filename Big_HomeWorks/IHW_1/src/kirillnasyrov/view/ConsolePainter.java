@@ -6,7 +6,7 @@ import kirillnasyrov.models.chip.Color;
 public class ConsolePainter {
     public static void paintGameBoard(GameBoard board) {
         for (int number = 1; number <= 8; ++number) {
-            System.out.println("   ---------------------------------------------------");
+            System.out.println("   -------------------------------------------------");
             System.out.print(" " + number + " ");
             for (char letter = 'a'; letter <= 'h'; ++letter) {
                 if (board.getField().getCell(number, letter).isEmpty()) {
@@ -18,9 +18,9 @@ public class ConsolePainter {
                     }
                 } else {
                     if (board.getField().getCell(number, letter).getChip().getColor() == Color.White) {
-                        System.out.print("|  ⚫  ");
+                        System.out.print("|  ●  ");
                     } else {
-                        System.out.print("|  ⚪  ");
+                        System.out.print("|  ◯  ");
                     }
                 }
             }
@@ -32,7 +32,7 @@ public class ConsolePainter {
                 System.out.println("|");
             }
         }
-        System.out.println("   ---------------------------------------------------");
+        System.out.println("   -------------------------------------------------");
         System.out.println("      a     b     c     d     e     f     g     h   \n");
         System.out.print("Возможные ходы: [ ");
 
