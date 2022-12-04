@@ -43,6 +43,6 @@ public class ConsolePainter {
                 }
             }
         }
-        System.out.println(" ]");
+        System.out.println("]");
     }
 }
