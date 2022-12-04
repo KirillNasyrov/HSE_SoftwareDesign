@@ -6,6 +6,9 @@ import kirillnasyrov.handlers.GameHandler;
 import kirillnasyrov.models.cell.Cell;
 import kirillnasyrov.models.chip.Color;
 
+/**
+ * Класс, описываюий игрока
+ */
 public class Player {
     protected boolean possibilityToMove;
     protected final Color color;
@@ -27,6 +30,10 @@ public class Player {
         return ConsoleReader.getNumberOfMove();
     }
 
+    /**
+     * Отменяет предыдущий ход игрока
+     * @return состояние игры после отмены хода игрока
+     */
     public final Game undoMove() {
         if (!GameHandler.stackOfGames.isEmpty()) {
             GameHandler.stackOfGames.pop();
@@ -55,6 +62,11 @@ public class Player {
         }
     }
 
+    /**
+     * Считает, сколько максимум фишек поменяют цвет в пользу игрока
+     * @param game текщая игра
+     * @return максимальное количество, которые поменяют цвет в пользу игрока
+     */
     public final double getMaxNumberOfPointsManCanGet(Game game) {
         GameHandler.findCellsCanBeChosen(game, this);
         double max = 0;

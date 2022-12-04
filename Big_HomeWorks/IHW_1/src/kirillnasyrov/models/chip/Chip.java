@@ -1,5 +1,8 @@
 package kirillnasyrov.models.chip;
 
+/**
+ * Класс, описывающий фишку
+ */
 public class Chip {
     private Color color;
 

@@ -4,9 +4,16 @@ import kirillnasyrov.game.GameMode;
 
 import java.util.Scanner;
 
+/**
+ * Класс, который работает с консолью и считывает данные от пользователя
+ */
 public class ConsoleReader {
     private static final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Считвыает номер клетки
+     * @return номер клетки
+     */
     public static int getNumberOfCell() {
         int number;
         while (true) {
@@ -25,6 +32,10 @@ public class ConsoleReader {
         return number;
     }
 
+    /**
+     * Считывает выбор, какое действие сделать при ходе
+     * @return номер действия
+     */
     public static int getNumberOfMove() {
         int number;
         while (true) {
@@ -43,6 +54,10 @@ public class ConsoleReader {
         return number;
     }
 
+    /**
+     * Считывает букву клетки
+     * @return букву клетки
+     */
     public static char getLetterOfCell() {
         char letter;
         while (true) {
@@ -62,6 +77,10 @@ public class ConsoleReader {
         return letter;
     }
 
+    /**
+     * Считывает режим игры
+     * @return режим игры
+     */
     public static GameMode getGameMode() {
         int number;
         while (true) {
@@ -86,6 +105,10 @@ public class ConsoleReader {
         }
     }
 
+    /**
+     * Считывает выбор, начать игру заново или выйти
+     * @return номер действия
+     */
     public static int getNumberOfChoice() {
         int number;
         while (true) {

@@ -2,6 +2,9 @@ package kirillnasyrov.models.gameboard;
 
 import kirillnasyrov.models.field.Field;
 
+/**
+ * Класс, описывающей игровую поверхность
+ */
 public class GameBoard {
     private final Field field;
     private int numberOfBlack;

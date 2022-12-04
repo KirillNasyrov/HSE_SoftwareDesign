@@ -5,6 +5,9 @@ import kirillnasyrov.models.gameboard.GameBoard;
 import kirillnasyrov.models.player.Computer;
 import kirillnasyrov.models.player.Player;
 
+/**
+ * Класс, описывающий игру
+ */
 public class Game {
     private Player playerForWhite;
     private Player playerForBlack;

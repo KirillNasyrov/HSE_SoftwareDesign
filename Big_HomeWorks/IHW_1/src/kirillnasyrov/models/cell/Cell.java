@@ -2,6 +2,9 @@ package kirillnasyrov.models.cell;
 
 import kirillnasyrov.models.chip.Chip;
 
+/**
+ * Класс, опсиывающий клетку
+ */
 public class Cell {
     private char letter;
     private int number;
@@ -16,6 +19,10 @@ public class Cell {
         chip = null;
     }
 
+    /**
+     * Конструктор копирования
+     * @param cell клетка
+     */
     public Cell(Cell cell) {
         letter = cell.getLetter();
         number = cell.getNumber();
@@ -24,6 +31,10 @@ public class Cell {
         possibilityForChoice = cell.canBeChosen();
     }
 
+    /**
+     * Устанавливает номер клетки
+     * @param value номер клетки
+     */
     public void setLetter(char value) {
         if (value < 'a' || value > 'h') {
             throw new IllegalArgumentException("Wrong letter");
@@ -32,6 +43,10 @@ public class Cell {
         }
     }
 
+    /**
+     * Устанавливает букву клетки
+     * @param value буква клетки
+     */
     public void setNumber(int value) {
         if (value < 1 || value > 8) {
             throw new IllegalArgumentException("Wrong number");
@@ -53,11 +68,19 @@ public class Cell {
         return this.number;
     }
 
+    /**
+     * Устанавливает фишку в клетке
+     * @param chip фишка
+     */
     public void setChip(Chip chip) {
         this.chip = chip;
         emptiness = false;
     }
 
+    /**
+     * Возвращает фишку, которая находится в клетке
+     * @return фишка
+     */
     public Chip getChip() {
         if (!isEmpty()) {
             return chip;
@@ -66,6 +89,10 @@ public class Cell {
         }
     }
 
+    /**
+     * Устанавливает возможность выбрать клетку в момент хода игрока
+     * @param possibilityForChoice возможность выбрать клетку
+     */
     public void setPossibilityForChoice(boolean possibilityForChoice) {
         this.possibilityForChoice = possibilityForChoice;
     }

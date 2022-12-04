@@ -4,6 +4,9 @@ import kirillnasyrov.models.cell.Cell;
 import kirillnasyrov.models.chip.Chip;
 import kirillnasyrov.models.chip.Color;
 
+/**
+ * Класс, описывающий игровую доску
+ */
 public class Field {
     private final Cell[][] field = new Cell[8][8];
 

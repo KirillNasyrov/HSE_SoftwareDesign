@@ -13,34 +13,58 @@ import kirillnasyrov.view.ConsolePainter;
 
 import java.util.Stack;
 
+/**
+ * Класс со статическими методами, предназначенный для обработки игровых действий.
+ */
 public class GameHandler {
     public static Stack<Game> stackOfGames = new Stack<>();
     private static int maxNumberOfPoints = 0;
 
+    /**
+     * Устанавливает режим игры
+     * @param game игра, которой будет установлен режим игры
+     */
     public static void chooseMode(Game game) {
         game.setGameMode(ConsoleReader.getGameMode());
     }
 
+    /**
+     * Устанавливает клетки, куда можнт сходить игрок
+     * @param game действующая игра
+     * @param player игрок, который делает ход
+     */
     public static void findCellsCanBeChosen(Game game, Player player) {
         makeCellsUsual(game);
         for (int number = 1; number <= 8; ++number) {
             for (char letter = 'a'; letter <= 'h'; ++letter) {
                 if (!game.getGameBoard().getField().getCell(number, letter).isEmpty()) {
                     if (game.getGameBoard().getField().getCell(number, letter).getChip().getColor() == player.getOppositeColor()) {
-                        checkCells(game.getGameBoard().getField(), game.getGameBoard().getField().getCell(number, letter), player);
+                        checkCell(game.getGameBoard().getField(), game.getGameBoard().getField().getCell(number, letter), player);
                     }
                 }
             }
         }
     }
 
-    public static void checkCells(Field field, Cell cell, Player player) {
+    /**
+     * Проверяет, можно ли сходить на данную клетку
+     * @param field игровое поле
+     * @param cell клетка
+     * @param player игрок, который делает ход
+     */
+    public static void checkCell(Field field, Cell cell, Player player) {
         checkHorizontalCells(field, cell, player);
         checkVerticalCells(field, cell, player);
         checkLeftDiagonalCells(field, cell, player);
         checkRightDiagonalCells(field, cell, player);
     }
 
+    /**
+     * Проверяет клетки по горизонтали рядом с выбранной клеткой
+     * @param field игровое поле
+     * @param cell выбранная клетка
+     * @param player игрок, который делает ход
+     */
     public static void checkHorizontalCells(Field field, Cell cell, Player player) {
         if (cell.getLetter() + 1 < 'i' && field.getCell(cell.getNumber(), (char) (cell.getLetter() + 1)).isEmpty()) {
             char startLetter = cell.getLetter();
@@ -76,6 +100,12 @@ public class GameHandler {
     }
 
 
+    /**
+     * Проверяет клетки по вертикали рядом с выбранной клеткой
+     * @param field игровое поле
+     * @param cell выбранная клетка
+     * @param player игрок, который делает ход
+     */
     public static void checkVerticalCells(Field field, Cell cell, Player player) {
         if (cell.getNumber() - 1 >= 1 && field.getCell(cell.getNumber() - 1, cell.getLetter()).isEmpty()) {
             int startNumber = cell.getNumber();
@@ -113,6 +143,12 @@ public class GameHandler {
     }
 
 
+    /**
+     * Проверяет клетки по левой диагонали рядом с выбранной клеткой
+     * @param field игровое поле
+     * @param cell выбранная клетка
+     * @param player игрок, который делает ход
+     */
     public static void checkLeftDiagonalCells(Field field, Cell cell, Player player) {
         if (cell.getNumber() - 1 >= 1
                 && cell.getLetter() - 1 >= 'a'
@@ -155,7 +191,12 @@ public class GameHandler {
         }
     }
 
-
+    /**
+     * Проверяет клетки по правой диагонали рядом с выбранной клеткой
+     * @param field игровое поле
+     * @param cell выбранная клетка
+     * @param player игрок, который делает ход
+     */
     public static void checkRightDiagonalCells(Field field, Cell cell, Player player) {
         if (cell.getNumber() - 1 >= 1
                 && cell.getLetter() + 1 <= 'h'
@@ -199,7 +240,10 @@ public class GameHandler {
     }
 
 
-
+    /**
+     * Запускает игру
+     * @param game текущая игра
+     */
     public static void startGame(Game game) {
         if (game.getGameMode() == GameMode.PlayerVsPlayer) {
             game.setPlayerForBlack(new Player(Color.Black));
@@ -291,7 +335,12 @@ public class GameHandler {
     }
 
 
-
+    /**
+     * Считает количество клеток, куда может сходить игрок
+     * @param game текущая игра
+     * @param player игрок, который делает ход
+     * @return количество клеток, куда может сходить игрок
+     */
     public static int getNumberOfUsableCellsForPlayer(Game game, Player player) {
         int sum = 0;
         findCellsCanBeChosen(game, player);
@@ -306,7 +355,10 @@ public class GameHandler {
     }
 
 
-
+    /**
+     * Делает клетки поля недоступными для того, чтобы делать ход на них
+     * @param game текущая игра
+     */
     public static void makeCellsUsual(Game game) {
         for (int i = 1; i <= 8; ++i) {
             for (char j = 'a'; j <='h'; ++j) {
@@ -317,7 +369,14 @@ public class GameHandler {
         }
     }
 
-
+    /**
+     * Меняет цвет клеток или считает количество клеток, которые поменяют цвет если поставить фишку на выбранную клетку
+     * @param game текущая игра
+     * @param player игрок, который делает ход
+     * @param cell выбранная клетка
+     * @param needOnlyToCountCells определяет, нужно ли только посчитать количество клеток, которые поменяют цвет или поменять цвет клеток
+     * @return 0, если параметр needOnlyToCountCells = false, иначе число клеток, которые поменяют цвет
+     */
     public static int changeColorOfCells(Game game, Player player, Cell cell, boolean needOnlyToCountCells) {
         int sum = 0;
 

@@ -7,6 +7,9 @@ import kirillnasyrov.models.cell.Cell;
 import kirillnasyrov.models.chip.Chip;
 import kirillnasyrov.models.chip.Color;
 
+/**
+ * Класс, описывающий компьютер
+ */
 public class Computer extends Player {
     private final GameMode gameMode;
 
@@ -15,6 +18,10 @@ public class Computer extends Player {
         this.gameMode = gameMode;
     }
 
+    /**
+     * Конструктор компирования
+     * @param player
+     */
     public Computer(Player player) {
         super(player.color);
         gameMode = ((Computer)player).getGameMode();
@@ -29,6 +36,11 @@ public class Computer extends Player {
         }
     }
 
+    /**
+     * Выбирает клетку, если компьютер в продвинутом режиме
+     * @param game текущая игра
+     * @return выбранная клетка
+     */
     public Cell chooseTheCellAtHardMode(Game game) {
         String message = "Ходит компьютер, у которого белые фишки.";
         System.out.println(message);
@@ -60,6 +72,11 @@ public class Computer extends Player {
         return cellShouldBeChosen;
     }
 
+    /**
+     * Выбирает клетку, если компьютер в лёгком режиме
+     * @param game текущая игра
+     * @return выбранная клетка
+     */
     public Cell chooseTheCellAtEasyMode(Game game) {
         String message = "Ходит компьютер, у которого белые фишки.";
         System.out.println(message);

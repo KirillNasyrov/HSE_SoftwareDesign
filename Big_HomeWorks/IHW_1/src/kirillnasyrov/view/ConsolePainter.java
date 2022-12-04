@@ -3,6 +3,9 @@ package kirillnasyrov.view;
 import kirillnasyrov.models.gameboard.GameBoard;
 import kirillnasyrov.models.chip.Color;
 
+/**
+ * Класс, отвещающий за отрисовку игры в консоли
+ */
 public class ConsolePainter {
     public static void paintGameBoard(GameBoard board) {
         for (int number = 1; number <= 8; ++number) {
