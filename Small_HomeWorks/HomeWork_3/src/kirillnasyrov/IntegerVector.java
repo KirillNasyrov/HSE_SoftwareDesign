@@ -1,13 +1,16 @@
 package kirillnasyrov;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
-public class ListOfInt implements IntegerList{
-    private final ArrayList<Integer> list;
+public class IntegerVector implements IntegerList {
+    private Integer[] array;
+    int capacity;
+    int size;
 
-    public ListOfInt() {
-        list = new ArrayList<>();
+    public IntegerVector() {
+        array = new Integer[16];
+        capacity = 16;
+        size = 0;
     }
 
     /**
@@ -19,7 +22,7 @@ public class ListOfInt implements IntegerList{
      */
     @Override
     public int size() {
-        return list.size();
+        return size;
     }
 
     /**
@@ -29,7 +32,7 @@ public class ListOfInt implements IntegerList{
      */
     @Override
     public boolean isEmpty() {
-        return list.isEmpty();
+        return size() == 0;
     }
 
     /**
@@ -49,7 +52,18 @@ public class ListOfInt implements IntegerList{
      */
     @Override
     public boolean contains(Object o) {
-        return list.contains(o);
+        if (o == null) {
+            throw new NullPointerException();
+        }
+        if (!(o instanceof Integer)) {
+            throw new ClassCastException();
+        }
+        for (int i = 0; i < size(); ++i) {
+            if (array[i] == o) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -62,7 +76,10 @@ public class ListOfInt implements IntegerList{
      */
     @Override
     public Integer get(int index) {
-        return list.get(index);
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        return array[index];
     }
 
     /**
@@ -86,7 +103,30 @@ public class ListOfInt implements IntegerList{
      */
     @Override
     public void add(int index, Integer element) {
-        list.add(element);
+        if (element == null) {
+            throw new NullPointerException();
+        }
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        Integer[] arrayCopy;
+        arrayCopy = new Integer[size()];
+        if (size() >= 0) System.arraycopy(array, 0, arrayCopy, 0, size());
+
+        if (size() + 1 > capacity) {
+            array = new Integer[size() * 2];
+            capacity = size() * 2;
+        }
+
+        for (int i = 0; i < index; ++i) {
+            array[i] = arrayCopy[i];
+        }
+        array[index] = element;
+        for (int i = index + 1; i < size(); ++i) {
+            array[i] = arrayCopy[i - 1];
+        }
+        ++size;
     }
 
     /**
@@ -104,7 +144,22 @@ public class ListOfInt implements IntegerList{
      */
     @Override
     public Integer remove(int index) {
-        return list.remove(index);
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        Integer element = array[index];
+        Integer[] arrayCopy = new Integer[size()];
+        if (size() >= 0) System.arraycopy(array, 0, arrayCopy, 0, size());
+
+        for (int i = 0; i < index; ++i) {
+            array[i] = arrayCopy[i];
+        }
+
+        for (int i = index + 1; i < size(); ++i) {
+            array[i - 1] = arrayCopy[i];
+        }
+        --size;
+        return element;
     }
 
     /**
@@ -126,7 +181,15 @@ public class ListOfInt implements IntegerList{
      */
     @Override
     public int indexOf(Integer o) {
-        return list.indexOf(o);
+        if (o == null) {
+            throw new NullPointerException();
+        }
+        for (int i = 0; i < size(); ++i) {
+            if (array[i] == o) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -143,17 +206,18 @@ public class ListOfInt implements IntegerList{
      * @param e element to be appended to this list
      * @return {@code true} (as specified by {@link Collection#add})
      * @throws UnsupportedOperationException if the {@code add} operation
-     *                                       is not supported by this list
-     * @throws ClassCastException            if the class of the specified element
-     *                                       prevents it from being added to this list
-     * @throws NullPointerException          if the specified element is null and this
-     *                                       list does not permit null elements
-     * @throws IllegalArgumentException      if some property of this element
-     *                                       prevents it from being added to this list
+     *         is not supported by this list
+     * @throws ClassCastException if the class of the specified element
+     *         prevents it from being added to this list
+     * @throws NullPointerException if the specified element is null and this
+     *         list does not permit null elements
+     * @throws IllegalArgumentException if some property of this element
+     *         prevents it from being added to this list
      */
     @Override
     public boolean add(Integer e) {
-        return list.add(e);
+        add(size(), e);
+        return true;
     }
 
     /**
@@ -179,6 +243,13 @@ public class ListOfInt implements IntegerList{
      */
     @Override
     public boolean remove(Integer o) {
-        return list.remove(o);
+        if (o == null) {
+            throw new NullPointerException();
+        }
+        if (contains(o)) {
+            remove(indexOf(o));
+            return true;
+        }
+        return false;
     }
 }

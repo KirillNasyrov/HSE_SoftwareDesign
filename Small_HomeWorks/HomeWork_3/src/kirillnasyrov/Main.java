@@ -3,7 +3,8 @@ package kirillnasyrov;
 public class Main {
 
     public static void main(String[] args) {
-        ListOfInt list = new ListOfInt();
-        list.add(5);
+        IntegerVector vector = new IntegerVector();
+        vector.add(5);
+        vector.add(3);
     }
 }
