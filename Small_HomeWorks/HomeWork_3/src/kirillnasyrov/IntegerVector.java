@@ -89,7 +89,7 @@ public class IntegerVector implements IntegerList {
      * indices).
      *
      * @param index   index at which the specified element is to be inserted
-     * @param element element to be inserted
+     * @param o element to be inserted
      * @throws UnsupportedOperationException if the {@code add} operation
      *                                       is not supported by this list
      * @throws ClassCastException            if the class of the specified element
@@ -102,9 +102,12 @@ public class IntegerVector implements IntegerList {
      *                                       ({@code index < 0 || index > size()})
      */
     @Override
-    public void add(int index, Integer element) {
-        if (element == null) {
+    public void add(int index, Object o) {
+        if (o == null) {
             throw new NullPointerException();
+        }
+        if (!(o instanceof Integer)) {
+            throw new ClassCastException();
         }
         if (index < 0 || index > size()) {
             throw new IndexOutOfBoundsException();
@@ -119,12 +122,10 @@ public class IntegerVector implements IntegerList {
             capacity = size() * 2;
         }
 
-        for (int i = 0; i < index; ++i) {
-            array[i] = arrayCopy[i];
-        }
-        array[index] = element;
-        for (int i = index + 1; i < size(); ++i) {
-            array[i] = arrayCopy[i - 1];
+        System.arraycopy(arrayCopy, 0, array, 0, index);
+        array[index] = (Integer) o;
+        if (size() - (index + 1) >= 0) {
+            System.arraycopy(arrayCopy, index + 1 - 1, array, index + 1, size() - (index + 1));
         }
         ++size;
     }
@@ -180,9 +181,12 @@ public class IntegerVector implements IntegerList {
      *                              (<a href="Collection.html#optional-restrictions">optional</a>)
      */
     @Override
-    public int indexOf(Integer o) {
+    public int indexOf(Object o) {
         if (o == null) {
             throw new NullPointerException();
+        }
+        if (!(o instanceof Integer)) {
+            throw new ClassCastException();
         }
         for (int i = 0; i < size(); ++i) {
             if (array[i] == o) {
@@ -203,7 +207,7 @@ public class IntegerVector implements IntegerList {
      * classes should clearly specify in their documentation any restrictions
      * on what elements may be added.
      *
-     * @param e element to be appended to this list
+     * @param o element to be appended to this list
      * @return {@code true} (as specified by {@link Collection#add})
      * @throws UnsupportedOperationException if the {@code add} operation
      *         is not supported by this list
@@ -215,8 +219,8 @@ public class IntegerVector implements IntegerList {
      *         prevents it from being added to this list
      */
     @Override
-    public boolean add(Integer e) {
-        add(size(), e);
+    public boolean add(Object o) {
+        add(size(), o);
         return true;
     }
 
@@ -242,9 +246,12 @@ public class IntegerVector implements IntegerList {
      *                                       is not supported by this list
      */
     @Override
-    public boolean remove(Integer o) {
+    public boolean remove(Object o) {
         if (o == null) {
             throw new NullPointerException();
+        }
+        if (!(o instanceof Integer)) {
+            throw new ClassCastException();
         }
         if (contains(o)) {
             remove(indexOf(o));

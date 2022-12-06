@@ -53,7 +53,7 @@ public interface IntegerList {
      * indices).
      *
      * @param index index at which the specified element is to be inserted
-     * @param element element to be inserted
+     * @param o element to be inserted
      * @throws UnsupportedOperationException if the {@code add} operation
      *         is not supported by this list
      * @throws ClassCastException if the class of the specified element
@@ -65,7 +65,7 @@ public interface IntegerList {
      * @throws IndexOutOfBoundsException if the index is out of range
      *         ({@code index < 0 || index > size()})
      */
-    void add(int index, Integer element);
+    void add(int index, Object o);
 
     /**
      * Removes the element at the specified position in this list (optional
@@ -99,7 +99,7 @@ public interface IntegerList {
      *         list does not permit null elements
      *         (<a href="Collection.html#optional-restrictions">optional</a>)
      */
-    int indexOf(Integer o);
+    int indexOf(Object o);
 
 
     /**
@@ -113,7 +113,7 @@ public interface IntegerList {
      * classes should clearly specify in their documentation any restrictions
      * on what elements may be added.
      *
-     * @param e element to be appended to this list
+     * @param o element to be appended to this list
      * @return {@code true} (as specified by {@link Collection#add})
      * @throws UnsupportedOperationException if the {@code add} operation
      *         is not supported by this list
@@ -124,7 +124,7 @@ public interface IntegerList {
      * @throws IllegalArgumentException if some property of this element
      *         prevents it from being added to this list
      */
-    boolean add(Integer e);
+    boolean add(Object o);
 
     /**
      * Removes the first occurrence of the specified element from this list,
@@ -147,5 +147,5 @@ public interface IntegerList {
      * @throws UnsupportedOperationException if the {@code remove} operation
      *         is not supported by this list
      */
-    boolean remove(Integer o);
+    boolean remove(Object o);
 }
