@@ -6,5 +6,6 @@ public class Main {
         IntegerVector vector = new IntegerVector();
         vector.add(5);
         vector.add(3);
+        System.out.println("hello");
     }
 }
