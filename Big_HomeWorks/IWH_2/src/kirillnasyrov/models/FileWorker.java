@@ -72,6 +72,7 @@ public class FileWorker {
     }
 
     public void printSequence(ArrayList<FileNode> arrayList) {
+        System.out.println("Файлы отсортированы топологически");
         for (FileNode node : arrayList) {
             System.out.println(node.getCurrentFile().toFile().getName());
         }

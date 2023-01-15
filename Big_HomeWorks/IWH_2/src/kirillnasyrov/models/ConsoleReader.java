@@ -17,6 +17,7 @@ public class ConsoleReader {
     }
 
     public String getFileNameForCreating() {
+        System.out.println("Файл будет создан в корневой директории. Файла с введённым именем не должно быть в ней");
         System.out.print("Введите имя файла: ");
         return scanner.next();
     }
