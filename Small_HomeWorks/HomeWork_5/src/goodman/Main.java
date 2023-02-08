@@ -29,6 +29,6 @@ public class Main {
         System.out.println("Количество разных национальностей: " + count3);
         System.out.println();
 
-        userList.stream().filter(p -> (p.getFirstName().charAt(0) != 'M')).filter(p -> (p.getAge() > 10)).toList().forEach(System.out::println);
+        userList.stream().filter(user -> (user.getFirstName().charAt(0) != 'M')).filter(user -> (user.getAge() > 10)).toList().forEach(System.out::println);
     }
 }
