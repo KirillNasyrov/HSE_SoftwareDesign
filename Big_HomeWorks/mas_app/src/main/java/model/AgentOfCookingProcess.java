@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AgentOfCookingProcess {
-    private List<Process> process_log;
+    private List<CookingProcess> cookingProcess_log;
 
-    public AgentOfCookingProcess(List<Process> processLog) {
-        process_log = new ArrayList<>(processLog);
+    public AgentOfCookingProcess(List<CookingProcess> cookingProcessLog) {
+        cookingProcess_log = new ArrayList<>(cookingProcessLog);
     }
 
     public AgentOfCookingProcess() {
     }
 
-    public List<Process> getProcess_log() {
-        return new ArrayList<>(process_log);
+    public List<CookingProcess> getProcess_log() {
+        return new ArrayList<>(cookingProcess_log);
     }
 
-    public void setProcess_log(List<Process> process_log) {
-        this.process_log = new ArrayList<>(process_log);
+    public void setProcess_log(List<CookingProcess> cookingProcess_log) {
+        this.cookingProcess_log = new ArrayList<>(cookingProcess_log);
     }
 }

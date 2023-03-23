@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Process {
+public class CookingProcess {
     private Integer proc_id;
     private Integer ord_dish;
     private String proc_started;
@@ -11,7 +11,7 @@ public class Process {
     private boolean proc_active;
     private List<ProcessOperation> proc_operations;
 
-    public Process(Integer procId, Integer ordDish, String procStarted, String procEnded, boolean procActive, List<ProcessOperation> procOperations) {
+    public CookingProcess(Integer procId, Integer ordDish, String procStarted, String procEnded, boolean procActive, List<ProcessOperation> procOperations) {
         proc_id = procId;
         ord_dish = ordDish;
         proc_started = procStarted;
@@ -20,7 +20,7 @@ public class Process {
         proc_operations = new ArrayList<>(procOperations);
     }
 
-    public Process() {
+    public CookingProcess() {
     }
 
     public Integer getProc_id() {
