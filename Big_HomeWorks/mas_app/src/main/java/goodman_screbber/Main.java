@@ -11,7 +11,7 @@ public class Main {
         String jsonString = """
                 {
                             "menu_dishes": [{
-                                                    "menu_dish_id": 28,
+                                                    "menu_dish_id": 12,
                                                     "menu_dish_card": 518,
                                                     "menu_dish_price": 59,
                                                     "menu_dish_active": true
