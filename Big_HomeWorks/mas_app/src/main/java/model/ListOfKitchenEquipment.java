@@ -10,6 +10,9 @@ public class ListOfKitchenEquipment {
         this.equipment = new ArrayList<>(equipment);
     }
 
+    public ListOfKitchenEquipment() {
+    }
+
     public List<Equipment> getEquipment() {
         return new ArrayList<>(equipment);
     }

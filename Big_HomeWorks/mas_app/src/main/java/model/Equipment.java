@@ -1,21 +1,24 @@
 package model;
 
 public class Equipment {
-    private EquipType equip_type;
+    private Integer equip_type;
     private String equip_name;
     private boolean equip_active;
 
-    public Equipment(EquipType equip_type, String equipName, boolean equipActive) {
+    public Equipment(Integer equip_type, String equipName, boolean equipActive) {
         this.equip_type = equip_type;
         equip_name = equipName;
         equip_active = equipActive;
     }
 
-    public EquipType getEquip_type() {
+    public Equipment() {
+    }
+
+    public Integer getEquip_type() {
         return equip_type;
     }
 
-    public void setEquip_type(EquipType equip_type) {
+    public void setEquip_type(Integer equip_type) {
         this.equip_type = equip_type;
     }
 

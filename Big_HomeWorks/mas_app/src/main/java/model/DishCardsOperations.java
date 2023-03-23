@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public class DIshCardsOperations {
+public class DishCardsOperations {
     private Integer oper_type;
     private Double oper_time;
     private Integer oper_async_point;

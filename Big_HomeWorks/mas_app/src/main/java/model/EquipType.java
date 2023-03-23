@@ -3,14 +3,18 @@ package model;
 public class EquipType {
     private String equip_type_name;
     private Integer equip_type_id;
-    public EquipType(int equipTypeId, String equipTypeName) {
+    public EquipType(Integer equipTypeId, String equipTypeName) {
         equip_type_id = equipTypeId;
         equip_type_name = equipTypeName;
     }
-    public int getEquip_type_id() {
+
+    public EquipType() {
+    }
+
+    public Integer getEquip_type_id() {
         return equip_type_id;
     }
-    public void setEquip_type_id(int equip_type_id) {
+    public void setEquip_type_id(Integer equip_type_id) {
         this.equip_type_id = equip_type_id;
     }
     public String getEquip_type_name() {

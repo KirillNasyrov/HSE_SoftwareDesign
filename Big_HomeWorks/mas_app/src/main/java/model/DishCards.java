@@ -8,7 +8,7 @@ public class DishCards {
     private String card_descr;
     private Double card_time;
     private Integer equip_type;
-    private List<DIshCardsOperations> operations;
+    private List<DishCardsOperations> operations;
 
     public Integer getCard_id() {
         return card_id;
@@ -50,11 +50,11 @@ public class DishCards {
         this.equip_type = equip_type;
     }
 
-    public List<DIshCardsOperations> getOperations() {
+    public List<DishCardsOperations> getOperations() {
         return operations;
     }
 
-    public void setOperations(List<DIshCardsOperations> operations) {
+    public void setOperations(List<DishCardsOperations> operations) {
         this.operations = operations;
     }
 }
