@@ -3,14 +3,14 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dish {
+public class ListOfDishes {
     private List<DishCards> dish_cards;
 
-    public Dish(List<DishCards> dish_cards) {
+    public ListOfDishes(List<DishCards> dish_cards) {
         this.dish_cards = new ArrayList<>(dish_cards);
     }
 
-    public Dish() {
+    public ListOfDishes() {
     }
 
     public List<DishCards> getDish_cards() {

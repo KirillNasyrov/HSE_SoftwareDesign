@@ -2,40 +2,29 @@ package goodman_screbber;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Dish;
-import model.ListOfKitchenEquipment;
-import model.Menu;
-import model.MenuDishes;
+import model.*;
 
 public class Main {
     public static void main(String[] args) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = """
                 {
-                            "equipment": [{
-                                                    "equip_type": 2,
-                                                    "equip_name": "LIDER 250",
-                                                    "equip_active": true
-                                        },
-                  {
-                                                    "equip_type": 2,
-                                                    "equip_name": "LIDER 150",
-                                                    "equip_active": false
+                            "equipment_type": [{
+                                                    "equip_type_id": 2,
+                                                    "equip_type_name": "rotary oven"
                                         },
                                         {
-                                                    "equip_type": 25,
-                                                    "equip_name": "DAZHENG LOOKYAMI",
-                                                    "equip_active": true
+                                                    "equip_type_id": 25,
+                                                    "equip_type_name": "thermopot"
                                         }
                             ]
                 }
-                                
+                            
                             
                 """;
 
-        ListOfKitchenEquipment menuItem = objectMapper.readValue(jsonString, ListOfKitchenEquipment.class);
+        ListOfEquipmentType menuItem = objectMapper.readValue(jsonString, ListOfEquipmentType.class);
         System.out.println();
-        System.out.println("fuck this shit");
 //        for (MenuDishes menuDish : menuItem.menu_dishes) {
 //            System.out.println(menuDish.getMenu_dish_card());
 //        }
