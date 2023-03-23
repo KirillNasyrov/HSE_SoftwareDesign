@@ -18,6 +18,6 @@ public class ListOfKitchenEquipment {
     }
 
     public void setEquipment(List<Equipment> equipment) {
-        this.equipment = equipment;
+        this.equipment = new ArrayList<>(equipment);
     }
 }

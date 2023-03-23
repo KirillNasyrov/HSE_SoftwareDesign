@@ -9,6 +9,9 @@ public class OperationType {
         oper_type_name = operTypeName;
     }
 
+    public OperationType() {
+    }
+
     public Integer getOper_type_id() {
         return oper_type_id;
     }

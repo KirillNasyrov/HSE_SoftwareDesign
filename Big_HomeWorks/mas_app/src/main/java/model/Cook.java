@@ -11,6 +11,9 @@ public class Cook {
         cook_active = cookActive;
     }
 
+    public Cook() {
+    }
+
     public Integer getCook_id() {
         return cook_id;
     }

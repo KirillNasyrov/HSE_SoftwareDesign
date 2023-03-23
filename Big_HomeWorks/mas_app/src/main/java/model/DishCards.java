@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DishCards {
@@ -9,6 +10,18 @@ public class DishCards {
     private Double card_time;
     private Integer equip_type;
     private List<DishCardsOperations> operations;
+
+    public DishCards(Integer card_id, String dish_name, String card_descr, Double card_time, Integer equip_type, List<DishCardsOperations> operations) {
+        this.card_id = card_id;
+        this.dish_name = dish_name;
+        this.card_descr = card_descr;
+        this.card_time = card_time;
+        this.equip_type = equip_type;
+        this.operations = new ArrayList<>(operations);
+    }
+
+    public DishCards() {
+    }
 
     public Integer getCard_id() {
         return card_id;
@@ -51,10 +64,10 @@ public class DishCards {
     }
 
     public List<DishCardsOperations> getOperations() {
-        return operations;
+        return new ArrayList<>(operations);
     }
 
     public void setOperations(List<DishCardsOperations> operations) {
-        this.operations = operations;
+        this.operations = new ArrayList<>(operations);
     }
 }

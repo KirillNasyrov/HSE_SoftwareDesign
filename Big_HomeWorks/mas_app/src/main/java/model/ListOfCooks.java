@@ -10,11 +10,14 @@ public class ListOfCooks {
         this.cookers = new ArrayList<>(cookers);
     }
 
+    public ListOfCooks() {
+    }
+
     public List<Cook> getCookers() {
         return new ArrayList<>(cookers);
     }
 
     public void setCookers(List<Cook> cookers) {
-        this.cookers = cookers;
+        this.cookers = new ArrayList<>(cookers);
     }
 }

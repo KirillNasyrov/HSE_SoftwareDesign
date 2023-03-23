@@ -18,6 +18,6 @@ public class Dish {
     }
 
     public void setDish_cards(List<DishCards> dish_cards) {
-        this.dish_cards = dish_cards;
+        this.dish_cards = new ArrayList<>(dish_cards);
     }
 }
