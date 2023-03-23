@@ -35,6 +35,7 @@ public class Main {
 
         ListOfKitchenEquipment menuItem = objectMapper.readValue(jsonString, ListOfKitchenEquipment.class);
         System.out.println();
+        System.out.println("fuck this shit");
 //        for (MenuDishes menuDish : menuItem.menu_dishes) {
 //            System.out.println(menuDish.getMenu_dish_card());
 //        }
