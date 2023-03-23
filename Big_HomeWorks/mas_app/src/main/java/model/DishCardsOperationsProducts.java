@@ -4,10 +4,10 @@ public class DishCardsOperationsProducts {
     Integer prod_type;
     Integer prod_quantity;
 
-    public DishCardsOperationProducts() {
+    public DishCardsOperationsProducts() {
     }
 
-    public DishCardsOperationProducts(Integer prod_type, Integer prod_quantity) {
+    public DishCardsOperationsProducts(Integer prod_type, Integer prod_quantity) {
         this.prod_type = prod_type;
         this.prod_quantity = prod_quantity;
     }
