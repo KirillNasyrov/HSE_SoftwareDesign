@@ -2,6 +2,6 @@ package goodman_screbber;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello from screbber");
+        System.out.println("Hello from goodman");
     }
 }
