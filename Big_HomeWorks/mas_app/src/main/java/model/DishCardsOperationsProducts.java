@@ -1,6 +1,6 @@
 package model;
 
-public class DishCardsOperationProducts {
+public class DishCardsOperationsProducts {
     Integer prod_type;
     Integer prod_quantity;
 

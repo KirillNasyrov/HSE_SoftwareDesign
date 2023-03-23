@@ -6,7 +6,7 @@ public class DishCardsOperations {
     private Integer oper_type;
     private Double oper_time;
     private Integer oper_async_point;
-    private List<DishCardsOperationProducts> oper_products;
+    private List<DishCardsOperationsProducts> oper_products;
 
     public Integer getOper_type() {
         return oper_type;
@@ -32,11 +32,11 @@ public class DishCardsOperations {
         this.oper_async_point = oper_async_point;
     }
 
-    public List<DishCardsOperationProducts> getOper_products() {
+    public List<DishCardsOperationsProducts> getOper_products() {
         return oper_products;
     }
 
-    public void setOper_products(List<DishCardsOperationProducts> oper_products) {
+    public void setOper_products(List<DishCardsOperationsProducts> oper_products) {
         this.oper_products = oper_products;
     }
 }
