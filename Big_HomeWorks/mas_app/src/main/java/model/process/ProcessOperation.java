@@ -1,4 +1,4 @@
-package model;
+package model.process;
 
 public class ProcessOperation {
     private Integer proc_oper;

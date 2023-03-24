@@ -1,4 +1,6 @@
-package model;
+package model.dishCards;
+
+import model.dishCards.DishCards;
 
 import java.util.ArrayList;
 import java.util.List;

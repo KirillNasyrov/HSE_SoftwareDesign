@@ -1,4 +1,4 @@
-package model;
+package model.equipmentType;
 
 public class EquipmentType {
     private Integer equip_type_id;

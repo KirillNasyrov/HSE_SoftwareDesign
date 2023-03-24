@@ -1,4 +1,6 @@
-package model;
+package model.equipmentType;
+
+import model.equipmentType.EquipmentType;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package model;
+package model.cook;
 
 public class Cook {
     private Integer cook_id;

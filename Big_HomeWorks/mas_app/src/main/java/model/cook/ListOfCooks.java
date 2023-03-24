@@ -1,4 +1,6 @@
-package model;
+package model.cook;
+
+import model.cook.Cook;
 
 import java.util.ArrayList;
 import java.util.List;

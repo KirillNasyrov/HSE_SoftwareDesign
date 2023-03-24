@@ -1,4 +1,4 @@
-package model;
+package model.operationType;
 
 public class OperationType {
     private Integer oper_type_id;

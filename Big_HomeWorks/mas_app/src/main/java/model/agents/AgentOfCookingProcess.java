@@ -1,4 +1,6 @@
-package model;
+package model.agents;
+
+import model.process.CookingProcess;
 
 import java.util.ArrayList;
 import java.util.List;

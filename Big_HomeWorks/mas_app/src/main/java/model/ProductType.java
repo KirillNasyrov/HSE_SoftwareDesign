@@ -1,17 +1,17 @@
 package model;
 
-public class ProductTypes {
+public class ProductType {
     private Integer prod_type_id;
     private String prod_type_name;
     private Boolean prod_is_food;
 
-    public ProductTypes(Integer prod_type_id, String prod_type_name, Boolean prod_is_food) {
+    public ProductType(Integer prod_type_id, String prod_type_name, Boolean prod_is_food) {
         this.prod_type_id = prod_type_id;
         this.prod_type_name = prod_type_name;
         this.prod_is_food = prod_is_food;
     }
 
-    public ProductTypes() {
+    public ProductType() {
     }
 
     public Integer getProd_type_id() {

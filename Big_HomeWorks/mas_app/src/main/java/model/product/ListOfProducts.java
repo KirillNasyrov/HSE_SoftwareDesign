@@ -1,4 +1,6 @@
-package model;
+package model.product;
+
+import model.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;

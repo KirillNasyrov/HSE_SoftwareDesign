@@ -1,4 +1,6 @@
-package model;
+package model.operationType;
+
+import model.operationType.OperationType;
 
 import java.util.ArrayList;
 import java.util.List;

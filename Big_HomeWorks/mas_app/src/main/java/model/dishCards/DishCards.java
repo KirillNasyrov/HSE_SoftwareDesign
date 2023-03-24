@@ -1,4 +1,4 @@
-package model;
+package model.dishCards;
 
 import java.util.ArrayList;
 import java.util.List;

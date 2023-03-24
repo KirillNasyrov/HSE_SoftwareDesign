@@ -1,4 +1,6 @@
-package model;
+package model.equipment;
+
+import model.equipment.Equipment;
 
 import java.util.ArrayList;
 import java.util.List;

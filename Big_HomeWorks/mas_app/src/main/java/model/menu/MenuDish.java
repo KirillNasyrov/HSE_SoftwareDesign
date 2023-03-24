@@ -1,19 +1,19 @@
-package model;
+package model.menu;
 
-public class MenuDishes {
+public class MenuDish {
     private int menu_dish_id;
     private int menu_dish_card;
     private int menu_dish_price;
     private boolean menu_dish_active;
 
-    public MenuDishes(int menu_dish_id, int menu_dish_card, int menu_dish_price, boolean menu_dish_active) {
+    public MenuDish(int menu_dish_id, int menu_dish_card, int menu_dish_price, boolean menu_dish_active) {
         this.menu_dish_id = menu_dish_id;
         this.menu_dish_card = menu_dish_card;
         this.menu_dish_price = menu_dish_price;
         this.menu_dish_active = menu_dish_active;
     }
 
-    public MenuDishes() {
+    public MenuDish() {
     }
 
     public int getMenu_dish_id() {

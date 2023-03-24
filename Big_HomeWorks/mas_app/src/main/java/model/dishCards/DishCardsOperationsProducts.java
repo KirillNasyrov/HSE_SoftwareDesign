@@ -1,4 +1,4 @@
-package model;
+package model.dishCards;
 
 public class DishCardsOperationsProducts {
     Integer prod_type;
