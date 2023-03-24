@@ -2,10 +2,8 @@ package goodman_screbber;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.AgentOfCookingProcess;
-import model.AgentOfOperation;
-import model.CookingProcess;
-import model.Operation;
+import model.*;
+import model.agents.AgentOfOperation;
 
 public class Main {
     public static void main(String[] args) throws JsonProcessingException {
