@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 public class Product {
     private Integer prod_item_id;
     private Integer prod_item_type;
@@ -8,12 +10,12 @@ public class Product {
     private String prod_item_unit;
     private double prod_item_quantity;
     private Integer prod_item_cost;
-    private String prod_item_delivered;
-    private String prod_item_valid_until;
+    private Date prod_item_delivered;
+    private Date prod_item_valid_until;
 
     public Product(Integer prod_item_id, Integer prod_item_type, String prod_item_name,
                    String prod_item_company, String prod_item_unit, double prod_item_quantity,
-                   Integer prod_item_cost, String prod_item_delivered, String prod_item_valid_until) {
+                   Integer prod_item_cost, Date prod_item_delivered, Date prod_item_valid_until) {
         this.prod_item_id = prod_item_id;
         this.prod_item_type = prod_item_type;
         this.prod_item_name = prod_item_name;
@@ -84,19 +86,19 @@ public class Product {
         this.prod_item_cost = prod_item_cost;
     }
 
-    public String getProd_item_delivered() {
+    public Date getProd_item_delivered() {
         return prod_item_delivered;
     }
 
-    public void setProd_item_delivered(String prod_item_delivered) {
+    public void setProd_item_delivered(Date prod_item_delivered) {
         this.prod_item_delivered = prod_item_delivered;
     }
 
-    public String getProd_item_valid_until() {
+    public Date getProd_item_valid_until() {
         return prod_item_valid_until;
     }
 
-    public void setProd_item_valid_until(String prod_item_valid_until) {
+    public void setProd_item_valid_until(Date prod_item_valid_until) {
         this.prod_item_valid_until = prod_item_valid_until;
     }
 }
