@@ -1,17 +1,28 @@
 package model.cook;
 
-public class Cook {
+import model.visitorOrders.VisitorOrder;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.concurrent.BlockingQueue;
+
+public class Cook implements Runnable {
+    private VisitorOrder currentVisitorOrder;
     private Integer cook_id;
     private String cook_name;
     private boolean cook_active;
 
-    public Cook(Integer cookId, String cookName, boolean cookActive) {
+    public Cook(Integer cookId, String cookName) {
         cook_id = cookId;
         cook_name = cookName;
-        cook_active = cookActive;
+        cook_active = false;
     }
 
     public Cook() {
+    }
+
+    public void setCurrentVisitorOrder(VisitorOrder currentVisitorOrder) {
+        this.currentVisitorOrder = currentVisitorOrder;
     }
 
     public Integer getCook_id() {
@@ -36,5 +47,13 @@ public class Cook {
 
     public void setCook_active(boolean cook_active) {
         this.cook_active = cook_active;
+    }
+
+    @Override
+    public void run() {
+
+
+
+        System.out.println();
     }
 }

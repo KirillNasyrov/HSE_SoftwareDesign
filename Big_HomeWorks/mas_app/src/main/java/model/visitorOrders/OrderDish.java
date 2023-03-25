@@ -1,5 +1,10 @@
 package model.visitorOrders;
 
+import model.dishCards.ListOfDishes;
+import model.menu.ListOfMenuDishes;
+
+import java.util.NoSuchElementException;
+
 public class OrderDish {
     private Integer ord_dish_id;
     private Integer menu_dish;
@@ -11,6 +16,16 @@ public class OrderDish {
 
     public OrderDish() {
     }
+
+    public Double getCookingTime(ListOfDishes listOfDishes) {
+        for (var dish : listOfDishes.getDish_cards()) {
+            if (dish.getCard_id().equals(ord_dish_id)) {
+                return dish.getCard_time();
+            }
+        }
+        throw new NoSuchElementException();
+    }
+
 
     public Integer getOrd_dish_id() {
         return ord_dish_id;
