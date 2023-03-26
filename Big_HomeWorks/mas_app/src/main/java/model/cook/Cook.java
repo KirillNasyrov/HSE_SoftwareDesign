@@ -1,28 +1,35 @@
 package model.cook;
 
+import model.dishCards.DishCard;
 import model.visitorOrders.VisitorOrder;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.BlockingQueue;
 
 public class Cook implements Runnable {
     private VisitorOrder currentVisitorOrder;
+    private DishCard currentDish;
+    private BlockingQueue<VisitorOrder> orderFinishQueue;
     private Integer cook_id;
     private String cook_name;
     private boolean cook_active;
 
-    public Cook(Integer cookId, String cookName) {
-        cook_id = cookId;
-        cook_name = cookName;
-        cook_active = false;
+
+    public Cook(DishCard currentDish, Integer cook_id, String cook_name, boolean cook_active) {
+        this.currentDish = currentDish;
+        this.cook_id = cook_id;
+        this.cook_name = cook_name;
+        this.cook_active = cook_active;
+    }
+
+    public Cook(VisitorOrder currentVisitorOrder, DishCard currentDish, BlockingQueue<VisitorOrder> orderFinishQueue) {
+        this.currentVisitorOrder = currentVisitorOrder;
+        this.currentDish = currentDish;
+        this.orderFinishQueue = orderFinishQueue;
     }
 
     public Cook() {
-    }
-
-    public void setCurrentVisitorOrder(VisitorOrder currentVisitorOrder) {
-        this.currentVisitorOrder = currentVisitorOrder;
     }
 
     public Integer getCook_id() {
@@ -51,9 +58,20 @@ public class Cook implements Runnable {
 
     @Override
     public void run() {
-
-
-
-        System.out.println();
+        System.out.println("Start cooking order: " + currentVisitorOrder.getVis_name());
+        System.out.println("Start cooking dish: " + currentDish.getCard_descr());
+        try {
+            Thread.sleep(currentDish.getCard_time().intValue());
+            if (currentVisitorOrder.decrementAndGetNumberOfNotCookingDishes() == 0) {
+                LocalDateTime finishCookingTime = LocalDateTime.now();
+                var durationOfCookingOrder = ChronoUnit.MILLIS.
+                        between(currentVisitorOrder.getStartCookingTime(), finishCookingTime);
+                System.out.println("DONE " + currentVisitorOrder.getVis_name());
+                System.out.println(currentVisitorOrder.getVis_ord_started().plusSeconds(durationOfCookingOrder));
+                orderFinishQueue.add(currentVisitorOrder);
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

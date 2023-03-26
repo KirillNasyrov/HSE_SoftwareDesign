@@ -3,7 +3,7 @@ package model.dishCards;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DishCards {
+public class DishCard {
     private Integer card_id;
     private String dish_name;
     private String card_descr;
@@ -11,7 +11,8 @@ public class DishCards {
     private Integer equip_type;
     private List<DishCardsOperations> operations;
 
-    public DishCards(Integer card_id, String dish_name, String card_descr, Double card_time, Integer equip_type, List<DishCardsOperations> operations) {
+    public DishCard(Integer card_id, String dish_name, String card_descr, Double card_time, Integer equip_type,
+                    List<DishCardsOperations> operations) {
         this.card_id = card_id;
         this.dish_name = dish_name;
         this.card_descr = card_descr;
@@ -20,7 +21,7 @@ public class DishCards {
         this.operations = new ArrayList<>(operations);
     }
 
-    public DishCards() {
+    public DishCard() {
     }
 
     public Integer getCard_id() {

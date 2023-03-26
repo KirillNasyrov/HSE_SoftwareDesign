@@ -2,13 +2,18 @@ package goodman_screbber;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import model.Restaurant;
 import model.agents.AgentOfOperation;
+import model.dishCards.ListOfDishCards;
+import model.menu.ListOfMenuDishes;
 import model.visitorOrders.ListOfVisitorOrders;
 import model.visitorOrders.OrderDish;
 import model.visitorOrders.VisitorOrder;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) throws JsonProcessingException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = """
                 {
@@ -43,15 +48,11 @@ public class Main {
                             
                 """;
 
-        ListOfVisitorOrders menuItem = objectMapper.readValue(jsonString, ListOfVisitorOrders.class);
-        for (VisitorOrder visitorsOrder : menuItem.getVisitors_orders()) {
-            for (OrderDish dish : visitorsOrder.getVis_ord_dishes()) {
-                System.out.println(dish.getMenu_dish());
-                System.out.println(dish.getOrd_dish_id());
-            }
-        }
-//        for (MenuDishes menuDish : menuItem.menu_dishes) {
-//            System.out.println(menuDish.getMenu_dish_card());
-//        }
+        JsonParser jsonParser = new JsonParser();
+        ListOfVisitorOrders listOfVisitorOrders = jsonParser.getListOfVisitorOrdersFromJson();
+        ListOfMenuDishes menuDishes = jsonParser.getListOfMenuDishesFromJson();
+        ListOfDishCards listOfDishCards = jsonParser.getListOfDishCardsFromJson();
+        Restaurant restaurant = new Restaurant(listOfVisitorOrders, menuDishes, listOfDishCards);
+        restaurant.startCooking();
     }
 }

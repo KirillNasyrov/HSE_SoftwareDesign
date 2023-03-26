@@ -1,7 +1,7 @@
 package model.visitorOrders;
 
-import model.dishCards.ListOfDishes;
-import model.menu.ListOfMenuDishes;
+import model.Restaurant;
+import model.dishCards.ListOfDishCards;
 
 import java.util.NoSuchElementException;
 
@@ -17,13 +17,8 @@ public class OrderDish {
     public OrderDish() {
     }
 
-    public Double getCookingTime(ListOfDishes listOfDishes) {
-        for (var dish : listOfDishes.getDish_cards()) {
-            if (dish.getCard_id().equals(ord_dish_id)) {
-                return dish.getCard_time();
-            }
-        }
-        throw new NoSuchElementException();
+    public Double getCookingTime(Restaurant restaurant) {
+        return restaurant.findDishCardFromMenuById(menu_dish).getCard_time();
     }
 
 

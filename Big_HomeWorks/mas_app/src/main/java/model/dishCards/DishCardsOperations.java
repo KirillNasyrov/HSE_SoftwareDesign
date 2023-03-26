@@ -5,6 +5,7 @@ import java.util.List;
 
 public class DishCardsOperations {
     private Integer oper_type;
+    private Integer equip_type;
     private Double oper_time;
     private Integer oper_async_point;
     private List<DishCardsOperationsProducts> oper_products;
@@ -17,6 +18,14 @@ public class DishCardsOperations {
     }
 
     public DishCardsOperations() {
+    }
+
+    public Integer getEquip_type() {
+        return equip_type;
+    }
+
+    public void setEquip_type(Integer equip_type) {
+        this.equip_type = equip_type;
     }
 
     public Integer getOper_type() {

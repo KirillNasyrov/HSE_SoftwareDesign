@@ -2,31 +2,50 @@ package model.visitorOrders;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class VisitorOrder {
+    @JsonIgnore
+    private AtomicInteger numberOfNotCookingDishes;
+
+    @JsonIgnore
+    private LocalDateTime startCookingTime;
     private String vis_name;
-    private Date vis_ord_started;
-    private Date vis_ord_ended;
+    private LocalDateTime vis_ord_started;
+    private LocalDateTime vis_ord_ended;
     private Integer vis_ord_total;
     private List<OrderDish> vis_ord_dishes;
 
-    @JsonIgnore
-    private Double totalTimeOfCooking;
 
-    public VisitorOrder(String vis_name, Date vis_ord_started, Date vis_ord_ended,
+    public VisitorOrder(AtomicInteger numberOfNotCookingDishes, LocalDateTime startCookingTime, String vis_name,
+                        LocalDateTime vis_ord_started, LocalDateTime vis_ord_ended,
                         Integer vis_ord_total, List<OrderDish> vis_ord_dishes) {
+        this.numberOfNotCookingDishes = numberOfNotCookingDishes;
+        this.startCookingTime = startCookingTime;
         this.vis_name = vis_name;
         this.vis_ord_started = vis_ord_started;
         this.vis_ord_ended = vis_ord_ended;
         this.vis_ord_total = vis_ord_total;
-        this.vis_ord_dishes = new ArrayList<>(vis_ord_dishes);
-        //totalTimeOfCooking = vis_ord_dishes.stream().mapToDouble(dish -> dish.getCookingTime())
+        this.vis_ord_dishes = vis_ord_dishes;
     }
 
     public VisitorOrder() {
+    }
+
+    public int decrementAndGetNumberOfNotCookingDishes() {
+        return numberOfNotCookingDishes.decrementAndGet();
+    }
+
+    public LocalDateTime getStartCookingTime() {
+        return startCookingTime;
+    }
+
+    public void setStartCookingTime(LocalDateTime startCookingTime) {
+        this.startCookingTime = startCookingTime;
     }
 
     public String getVis_name() {
@@ -37,19 +56,19 @@ public class VisitorOrder {
         this.vis_name = vis_name;
     }
 
-    public Date getVis_ord_started() {
+    public LocalDateTime getVis_ord_started() {
         return vis_ord_started;
     }
 
-    public void setVis_ord_started(Date vis_ord_started) {
+    public void setVis_ord_started(LocalDateTime vis_ord_started) {
         this.vis_ord_started = vis_ord_started;
     }
 
-    public Date getVis_ord_ended() {
+    public LocalDateTime getVis_ord_ended() {
         return vis_ord_ended;
     }
 
-    public void setVis_ord_ended(Date vis_ord_ended) {
+    public void setVis_ord_ended(LocalDateTime vis_ord_ended) {
         this.vis_ord_ended = vis_ord_ended;
     }
 
@@ -62,10 +81,10 @@ public class VisitorOrder {
     }
 
     public List<OrderDish> getVis_ord_dishes() {
-        return new ArrayList<>(vis_ord_dishes);
+        return vis_ord_dishes;
     }
 
     public void setVis_ord_dishes(List<OrderDish> vis_ord_dishes) {
-        this.vis_ord_dishes = new ArrayList<>(vis_ord_dishes);
+        this.vis_ord_dishes = vis_ord_dishes;
     }
 }
