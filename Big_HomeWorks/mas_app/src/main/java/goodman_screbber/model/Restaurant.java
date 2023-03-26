@@ -9,6 +9,7 @@ import goodman_screbber.model.menu.MenuDish;
 import goodman_screbber.model.visitorOrders.ListOfVisitorOrders;
 import goodman_screbber.model.visitorOrders.OrderDish;
 
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class Restaurant {
     private final ListOfMenuDishes listOfMenuDishes;
-    // private final BlockingQueue<VisitorOrder> orderQueue = new LinkedBlockingQueue<>();
     private final List<VisitorOrder> orderQueue = new ArrayList<>();
     private final BlockingQueue<VisitorOrder> orderFinishQueue = new LinkedBlockingQueue<>();
     private ExecutorService threadPool = Executors.newFixedThreadPool(3);
@@ -34,6 +34,9 @@ public class Restaurant {
         orderQueue.addAll(listOfOrders.getVisitors_orders());
         this.listOfMenuDishes = listOfMenuDishes;
         this.listOfDishCards = listOfDishCards;
+        for (VisitorOrder visitorsOrder : listOfOrders.getVisitors_orders()) {
+            visitorsOrder.initNumberOfNotCookingDishes();
+        }
     }
 
     public DishCard findDishCardFromMenuById(Integer menuId) {
@@ -51,8 +54,8 @@ public class Restaurant {
     }
 
     public void startCooking() throws InterruptedException {
-
         for (int i = 0; i < orderQueue.size(); i++) {
+            orderQueue.get(i).setStartCookingRealTime(LocalDateTime.now());
             if (i != orderQueue.size() - 1) {
                 for (OrderDish orderDish : orderQueue.get(i).getVis_ord_dishes()) {
                     DishCard currentDish = findDishCardFromMenuById(orderDish.getMenu_dish());

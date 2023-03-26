@@ -64,9 +64,10 @@ public class Cook implements Runnable {
             Thread.sleep(currentDish.getCard_time().intValue() * 1000L);
             if (currentVisitorOrder.decrementAndGetNumberOfNotCookingDishes() == 0) {
                 LocalDateTime finishCookingTime = LocalDateTime.now();
-                var durationOfCookingOrder = ChronoUnit.MILLIS.
-                        between(currentVisitorOrder.getStartCookingTime(), finishCookingTime);
+                var durationOfCookingOrder = ChronoUnit.SECONDS.
+                        between(currentVisitorOrder.getStartCookingRealTime(), finishCookingTime);
                 System.out.println("DONE " + currentVisitorOrder.getVis_name());
+                System.out.println(durationOfCookingOrder);
                 System.out.println(currentVisitorOrder.getVis_ord_started().plusSeconds(durationOfCookingOrder));
                 orderFinishQueue.add(currentVisitorOrder);
             }

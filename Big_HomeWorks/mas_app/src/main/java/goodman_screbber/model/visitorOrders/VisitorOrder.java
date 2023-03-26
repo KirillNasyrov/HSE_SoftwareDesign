@@ -11,7 +11,7 @@ public class VisitorOrder {
     private AtomicInteger numberOfNotCookingDishes;
 
     @JsonIgnore
-    private LocalDateTime startCookingTime;
+    private LocalDateTime startCookingRealTime;
     private String vis_name;
     private LocalDateTime vis_ord_started;
     private LocalDateTime vis_ord_ended;
@@ -23,7 +23,7 @@ public class VisitorOrder {
                         LocalDateTime vis_ord_started, LocalDateTime vis_ord_ended,
                         Integer vis_ord_total, List<OrderDish> vis_ord_dishes) {
         this.numberOfNotCookingDishes = numberOfNotCookingDishes;
-        this.startCookingTime = startCookingTime;
+        this.startCookingRealTime = startCookingTime;
         this.vis_name = vis_name;
         this.vis_ord_started = vis_ord_started;
         this.vis_ord_ended = vis_ord_ended;
@@ -34,16 +34,20 @@ public class VisitorOrder {
     public VisitorOrder() {
     }
 
+    public void initNumberOfNotCookingDishes() {
+        numberOfNotCookingDishes = new AtomicInteger(vis_ord_dishes.size());
+    }
+
     public int decrementAndGetNumberOfNotCookingDishes() {
         return numberOfNotCookingDishes.decrementAndGet();
     }
 
-    public LocalDateTime getStartCookingTime() {
-        return startCookingTime;
+    public LocalDateTime getStartCookingRealTime() {
+        return startCookingRealTime;
     }
 
-    public void setStartCookingTime(LocalDateTime startCookingTime) {
-        this.startCookingTime = startCookingTime;
+    public void setStartCookingRealTime(LocalDateTime startCookingRealTime) {
+        this.startCookingRealTime = startCookingRealTime;
     }
 
     public String getVis_name() {
