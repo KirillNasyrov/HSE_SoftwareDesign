@@ -1,14 +1,9 @@
 package goodman_screbber;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Restaurant;
-import model.agents.AgentOfOperation;
-import model.dishCards.ListOfDishCards;
-import model.menu.ListOfMenuDishes;
-import model.visitorOrders.ListOfVisitorOrders;
-import model.visitorOrders.OrderDish;
-import model.visitorOrders.VisitorOrder;
+import goodman_screbber.model.Restaurant;
+import goodman_screbber.model.dishCards.ListOfDishCards;
+import goodman_screbber.model.menu.ListOfMenuDishes;
+import goodman_screbber.model.visitorOrders.ListOfVisitorOrders;
 
 import java.io.IOException;
 
