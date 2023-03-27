@@ -23,7 +23,6 @@ public class VisitorOrderForLog {
     public void addOrderDishCardForLog(OrderDishCardForLog orderDishCardForLog) {
         dishesOfOrder.add(orderDishCardForLog);
     }
-
     public BlockingQueue<OrderDishCardForLog> getDishesOfOrder() {
         return new LinkedBlockingQueue<>(dishesOfOrder);
     }

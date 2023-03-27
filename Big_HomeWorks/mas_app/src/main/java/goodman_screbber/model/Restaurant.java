@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import goodman_screbber.model.cook.ListOfCooks;
 import goodman_screbber.model.menu.ListOfMenuDishes;
 import goodman_screbber.model.orderLog.NotFoundDishCardErrorForLog;
 import goodman_screbber.model.orderLog.VisitorOrderForLog;
@@ -26,21 +27,19 @@ import java.util.concurrent.*;
 public class Restaurant {
     private final List<VisitorOrderForLog> visitorOrderForLogList = new ArrayList<>();
     private final List<NotFoundDishCardErrorForLog> errorsForLogList = new ArrayList<>();
-
-
     private final ListOfMenuDishes listOfMenuDishes;
     private final List<VisitorOrder> visitorOrderList = new ArrayList<>();
-    private final ExecutorService threadPool = Executors.newFixedThreadPool(3);
-
+    private final ExecutorService threadPool;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final ListOfDishCards listOfDishCards;
-
+    private final ListOfCooks listOfCooks;
     private final ObjectWriter writer;
 
-    public Restaurant(ListOfVisitorOrders listOfOrders,
-                      ListOfMenuDishes listOfMenuDishes,
-                      ListOfDishCards listOfDishCards) {
+    public Restaurant(ListOfVisitorOrders listOfOrders, ListOfMenuDishes listOfMenuDishes,
+                      ListOfDishCards listOfDishCards, ListOfCooks listOfCooks) {
 
+        this.listOfCooks = listOfCooks;
+        threadPool = Executors.newFixedThreadPool(listOfCooks.getCookers().size());
         visitorOrderList.addAll(listOfOrders.getVisitors_orders());
         visitorOrderList.sort(Comparator.comparing(VisitorOrder::getVis_ord_started));
 
@@ -60,6 +59,10 @@ public class Restaurant {
         writer = objectMapper.writer(new DefaultPrettyPrinter());
     }
 
+    /**
+     * Ищет по id меню соответвующую карточку блюда
+     * @param menuId id меню
+     */
     public Optional<DishCard> findDishCardFromMenuById(Integer menuId) {
         for (MenuDish menuDish : listOfMenuDishes.getMenu_dishes()) {
             if (menuDish.getMenu_dish_id() == menuId) {
@@ -71,10 +74,14 @@ public class Restaurant {
                 }
             }
         }
+
         errorsForLogList.add(new NotFoundDishCardErrorForLog(menuId));
         return Optional.empty();
     }
 
+    /**
+     * Записывает логи заказов и ощибок во время роботы
+     */
     private void writeJsonLogs() {
         try {
             writer.writeValue(Paths.get("errorLogs.json").toFile(), errorsForLogList);
@@ -84,7 +91,10 @@ public class Restaurant {
         }
     }
 
-    public void startCooking() throws InterruptedException {
+    /**
+     * Метод, запускающий приготовление всех заказов
+     */
+    public void startWorking() throws InterruptedException {
         for (int i = 0; i < visitorOrderList.size(); i++) {
             visitorOrderList.get(i).setStartCookingRealTime(LocalDateTime.now());
             if (i != visitorOrderList.size() - 1) {

@@ -2,6 +2,7 @@ package goodman_screbber;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import goodman_screbber.model.cook.ListOfCooks;
 import goodman_screbber.model.dishCards.ListOfDishCards;
 import goodman_screbber.model.menu.ListOfMenuDishes;
 import goodman_screbber.model.visitorOrders.ListOfVisitorOrders;
@@ -31,9 +32,15 @@ public class JsonParser {
     }
 
     public ListOfDishCards getListOfDishCardsFromJson() throws IOException {
-        Path path = FileSystems.getDefault().getPath("src", "main","java", "goodman_screbber/input", "dish_cards.json");
+        Path path = FileSystems.getDefault().getPath("src", "main","java", "goodman_screbber", "input", "dish_cards.json");
         ListOfDishCards listOfVisitorOrders = objectMapper.readValue(path.toFile(), ListOfDishCards.class);
         return listOfVisitorOrders;
+    }
+
+    public ListOfCooks getListOfCooksFromJson() throws IOException {
+        Path path = FileSystems.getDefault().getPath("src", "main","java", "goodman_screbber", "input", "cooks.json");
+        ListOfCooks listOfCooks = objectMapper.readValue(path.toFile(), ListOfCooks.class);
+        return listOfCooks;
     }
 
 

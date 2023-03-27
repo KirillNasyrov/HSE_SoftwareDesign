@@ -16,7 +16,6 @@ public class Cook implements Runnable {
     private String cook_name;
     private boolean cook_active;
 
-
     public Cook(DishCard currentDishCard, Integer cook_id, String cook_name, boolean cook_active) {
         this.currentDishCard = currentDishCard;
         this.cook_id = cook_id;
@@ -58,6 +57,10 @@ public class Cook implements Runnable {
         this.cook_active = cook_active;
     }
 
+    /**
+     * Запускает приготовление блюда, если оно последнее из неприготовленных блюд в заказе,
+     * то устанавливает время окончания всего заказа
+     */
     @Override
     public void run() {
         System.out.println("Start cooking order: " + currentVisitorOrder.getVis_name());
