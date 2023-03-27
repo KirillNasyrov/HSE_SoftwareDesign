@@ -63,14 +63,15 @@ public class Cook implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Start cooking order: " + currentVisitorOrder.getVis_name());
-        System.out.println("Start cooking dish: " + currentDishCard.getCard_descr());
+//        System.out.println("Start cooking order: " + currentVisitorOrder.getVis_name());
+//        System.out.println("Start cooking dish: " + currentDishCard.getCard_descr());
         try {
 
             Thread.sleep(currentDishCard.getCard_time().intValue() * 1000L);
 
             OrderDishCardForLog orderDishCardForLog = new OrderDishCardForLog(currentDishCard.getDish_name(),
                     currentDishCard.getCard_id());
+
 
             currentVisitorOrderForLog.addOrderDishCardForLog(orderDishCardForLog);
 
@@ -81,11 +82,11 @@ public class Cook implements Runnable {
                 var durationOfCookingOrder = ChronoUnit.SECONDS.
                         between(currentVisitorOrder.getStartCookingRealTime(), finishCookingTime);
 
-                System.out.println("DONE " + currentVisitorOrder.getVis_name());
+                // System.out.println("DONE " + currentVisitorOrder.getVis_name());
                 //System.out.println(durationOfCookingOrder);
 
                 LocalDateTime finished = currentVisitorOrder.getVis_ord_started().plusSeconds(durationOfCookingOrder);
-                System.out.println(finished);
+                // System.out.println("finished at: " + finished);
 
                 currentVisitorOrderForLog.setVisitorOrderFinished(finished);
                 //orderForLogQueue.add(currentVisitorOrderForLog);
