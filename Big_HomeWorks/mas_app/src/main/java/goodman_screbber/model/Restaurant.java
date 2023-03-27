@@ -60,7 +60,7 @@ public class Restaurant {
     }
 
     /**
-     * Ищет по id меню соответвующую карточку блюда
+     * Делает поиск по id меню соответвующую карточку блюда
      * @param menuId id меню
      */
     public Optional<DishCard> findDishCardFromMenuById(Integer menuId) {
