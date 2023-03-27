@@ -10,7 +10,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.concurrent.BlockingQueue;
 
 public class Cook implements Runnable {
-    private BlockingQueue<VisitorOrderForLog> orderForLogQueue;
     private VisitorOrderForLog currentVisitorOrderForLog;
     private VisitorOrder currentVisitorOrder;
     private DishCard currentDishCard;
@@ -27,11 +26,10 @@ public class Cook implements Runnable {
     }
 
     public Cook(VisitorOrder currentVisitorOrder, VisitorOrderForLog currentVisitorOrderForLog,
-                DishCard currentDishCard, BlockingQueue<VisitorOrderForLog> orderForLogQueue) {
+                DishCard currentDishCard) {
         this.currentVisitorOrder = currentVisitorOrder;
         this.currentVisitorOrderForLog = currentVisitorOrderForLog;
         this.currentDishCard = currentDishCard;
-        this.orderForLogQueue = orderForLogQueue;
     }
 
     public Cook() {
@@ -83,13 +81,11 @@ public class Cook implements Runnable {
                         between(currentVisitorOrder.getStartCookingRealTime(), finishCookingTime);
 
                 System.out.println("DONE " + currentVisitorOrder.getVis_name());
-                // System.out.println(durationOfCookingOrder);
 
                 LocalDateTime finished = currentVisitorOrder.getVis_ord_started().plusSeconds(durationOfCookingOrder);
                 System.out.println("finished at: " + finished);
 
                 currentVisitorOrderForLog.setVisitorOrderFinished(finished);
-                //orderForLogQueue.add(currentVisitorOrderForLog);
             }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

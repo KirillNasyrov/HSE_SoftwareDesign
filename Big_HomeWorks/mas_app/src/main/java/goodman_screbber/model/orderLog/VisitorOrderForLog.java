@@ -3,17 +3,20 @@ package goodman_screbber.model.orderLog;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class VisitorOrderForLog {
     private String nameOfVisitor;
     private LocalDateTime visitorOrderStarted;
     private LocalDateTime visitorOrderFinished;
-    private List<OrderDishCardForLog> dishesOfOrder;
+
+    private BlockingQueue<OrderDishCardForLog> dishesOfOrder;
 
     public VisitorOrderForLog(String nameOfVisitor, LocalDateTime visitorOrderStarted) {
         this.nameOfVisitor = nameOfVisitor;
         this.visitorOrderStarted = visitorOrderStarted;
-        dishesOfOrder = new ArrayList<>();
+        dishesOfOrder = new LinkedBlockingQueue<>();
     }
 
     public VisitorOrderForLog() {
@@ -23,6 +26,13 @@ public class VisitorOrderForLog {
         dishesOfOrder.add(orderDishCardForLog);
     }
 
+    public BlockingQueue<OrderDishCardForLog> getDishesOfOrder() {
+        return new LinkedBlockingQueue<>(dishesOfOrder);
+    }
+
+    public void setDishesOfOrder(BlockingQueue<OrderDishCardForLog> dishesOfOrder) {
+        this.dishesOfOrder = new LinkedBlockingQueue<>(dishesOfOrder);
+    }
     public void setVisitorOrderFinished(LocalDateTime visitorOrderFinished) {
         this.visitorOrderFinished = visitorOrderFinished;
     }
@@ -40,11 +50,5 @@ public class VisitorOrderForLog {
     }
     public LocalDateTime getVisitorOrderFinished() {
         return visitorOrderFinished;
-    }
-    public List<OrderDishCardForLog> getDishesOfOrder() {
-        return new ArrayList<>(dishesOfOrder);
-    }
-    public void setDishesOfOrder(List<OrderDishCardForLog> dishesOfOrder) {
-        this.dishesOfOrder = new ArrayList<>(dishesOfOrder);
     }
 }

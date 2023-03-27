@@ -1,6 +1,5 @@
 package goodman_screbber.model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -16,7 +15,6 @@ import goodman_screbber.model.menu.MenuDish;
 import goodman_screbber.model.visitorOrders.ListOfVisitorOrders;
 import goodman_screbber.model.visitorOrders.OrderDish;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -30,11 +28,12 @@ public class Restaurant {
     private final ListOfMenuDishes listOfMenuDishes;
     private final List<VisitorOrder> visitorOrderList = new ArrayList<>();
     private final List<VisitorOrderForLog> visitorOrderForLogList = new ArrayList<>();
-    private final BlockingQueue<VisitorOrderForLog> orderForLogQueue = new LinkedBlockingQueue<>();
     private final ExecutorService threadPool = Executors.newFixedThreadPool(3);
 
-
+    private final ObjectMapper objectMapper = new ObjectMapper();
     private final ListOfDishCards listOfDishCards;
+
+    private final ObjectWriter writer;
 
     public Restaurant(ListOfVisitorOrders listOfOrders,
                       ListOfMenuDishes listOfMenuDishes,
@@ -51,6 +50,10 @@ public class Restaurant {
         for (VisitorOrder visitorsOrder : listOfOrders.getVisitors_orders()) {
             visitorsOrder.initNumberOfNotCookingDishes();
         }
+
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        writer = objectMapper.writer(new DefaultPrettyPrinter());
     }
 
     public DishCard findDishCardFromMenuById(Integer menuId) {
@@ -67,6 +70,14 @@ public class Restaurant {
         throw new NoSuchElementException();
     }
 
+    private void writeJsonLogs() {
+        try {
+            writer.writeValue(Paths.get("res.json").toFile(), visitorOrderForLogList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void startCooking() throws InterruptedException {
         for (int i = 0; i < visitorOrderList.size(); i++) {
             visitorOrderList.get(i).setStartCookingRealTime(LocalDateTime.now());
@@ -75,7 +86,7 @@ public class Restaurant {
                 for (OrderDish orderDish : visitorOrderList.get(i).getVis_ord_dishes()) {
                     DishCard currentDishCard = findDishCardFromMenuById(orderDish.getMenu_dish());
                     threadPool.submit(new Cook(visitorOrderList.get(i), visitorOrderForLogList.get(i),
-                            currentDishCard, orderForLogQueue));
+                            currentDishCard));
                 }
 
                 var timeSimulationUntilNextOrder = ChronoUnit.MILLIS
@@ -88,22 +99,13 @@ public class Restaurant {
                     DishCard currentDishCard = findDishCardFromMenuById(orderDish.getMenu_dish());
 
                     threadPool.submit(new Cook(visitorOrderList.get(i), visitorOrderForLogList.get(i),
-                            currentDishCard, orderForLogQueue));
+                            currentDishCard));
                 }
             }
         }
         threadPool.shutdown();
         threadPool.awaitTermination(10, TimeUnit.SECONDS);
-        // Thread.sleep(1000);
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
 
-        try {
-            writer.writeValue(Paths.get("res.json").toFile(), visitorOrderForLogList);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        writeJsonLogs();
     }
 }
