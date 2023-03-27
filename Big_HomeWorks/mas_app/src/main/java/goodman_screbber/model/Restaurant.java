@@ -24,10 +24,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.*;
 
 public class Restaurant {
     private final ListOfMenuDishes listOfMenuDishes;
@@ -96,6 +93,7 @@ public class Restaurant {
             }
         }
         threadPool.shutdown();
+        threadPool.awaitTermination(10, TimeUnit.SECONDS);
         // Thread.sleep(1000);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
