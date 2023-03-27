@@ -14,11 +14,6 @@ public class OrderDish {
     public OrderDish() {
     }
 
-    public Double getCookingTime(Restaurant restaurant) {
-        return restaurant.findDishCardFromMenuById(menu_dish).getCard_time();
-    }
-
-
     public Integer getOrd_dish_id() {
         return ord_dish_id;
     }

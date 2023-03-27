@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import goodman_screbber.model.menu.ListOfMenuDishes;
+import goodman_screbber.model.orderLog.NotFoundDishCardErrorForLog;
 import goodman_screbber.model.orderLog.VisitorOrderForLog;
 import goodman_screbber.model.visitorOrders.VisitorOrder;
 import goodman_screbber.model.cook.Cook;
@@ -19,15 +20,16 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.concurrent.*;
 
 public class Restaurant {
+    private final List<VisitorOrderForLog> visitorOrderForLogList = new ArrayList<>();
+    private final List<NotFoundDishCardErrorForLog> errorsForLogList = new ArrayList<>();
+
+
     private final ListOfMenuDishes listOfMenuDishes;
     private final List<VisitorOrder> visitorOrderList = new ArrayList<>();
-    private final List<VisitorOrderForLog> visitorOrderForLogList = new ArrayList<>();
     private final ExecutorService threadPool = Executors.newFixedThreadPool(3);
 
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -38,16 +40,18 @@ public class Restaurant {
     public Restaurant(ListOfVisitorOrders listOfOrders,
                       ListOfMenuDishes listOfMenuDishes,
                       ListOfDishCards listOfDishCards) {
-        visitorOrderList.addAll(listOfOrders.getVisitors_orders());
 
-        for (int i = 0; i < listOfOrders.getVisitors_orders().size(); ++i) {
-            var order = listOfOrders.getVisitors_orders().get(i);
+        visitorOrderList.addAll(listOfOrders.getVisitors_orders());
+        visitorOrderList.sort(Comparator.comparing(VisitorOrder::getVis_ord_started));
+
+        for (int i = 0; i < visitorOrderList.size(); ++i) {
+            var order = visitorOrderList.get(i);
             visitorOrderForLogList.add(new VisitorOrderForLog(order.getVis_name(), order.getVis_ord_started()));
         }
 
         this.listOfMenuDishes = listOfMenuDishes;
         this.listOfDishCards = listOfDishCards;
-        for (VisitorOrder visitorsOrder : listOfOrders.getVisitors_orders()) {
+        for (VisitorOrder visitorsOrder : visitorOrderList) {
             visitorsOrder.initNumberOfNotCookingDishes();
         }
 
@@ -56,23 +60,25 @@ public class Restaurant {
         writer = objectMapper.writer(new DefaultPrettyPrinter());
     }
 
-    public DishCard findDishCardFromMenuById(Integer menuId) {
+    public Optional<DishCard> findDishCardFromMenuById(Integer menuId) {
         for (MenuDish menuDish : listOfMenuDishes.getMenu_dishes()) {
             if (menuDish.getMenu_dish_id() == menuId) {
                 Integer menuDishCardId = menuDish.getMenu_dish_card();
                 for (var dishCard : listOfDishCards.getDish_cards()) {
                     if (dishCard.getCard_id().equals(menuDishCardId)) {
-                        return dishCard;
+                        return Optional.of(dishCard);
                     }
                 }
             }
         }
-        throw new NoSuchElementException();
+        errorsForLogList.add(new NotFoundDishCardErrorForLog(menuId));
+        return Optional.empty();
     }
 
     private void writeJsonLogs() {
         try {
-            writer.writeValue(Paths.get("res.json").toFile(), visitorOrderForLogList);
+            writer.writeValue(Paths.get("errorLogs.json").toFile(), errorsForLogList);
+            writer.writeValue(Paths.get("orderLogs.json").toFile(), visitorOrderForLogList);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -84,9 +90,12 @@ public class Restaurant {
             if (i != visitorOrderList.size() - 1) {
 
                 for (OrderDish orderDish : visitorOrderList.get(i).getVis_ord_dishes()) {
-                    DishCard currentDishCard = findDishCardFromMenuById(orderDish.getMenu_dish());
-                    threadPool.submit(new Cook(visitorOrderList.get(i), visitorOrderForLogList.get(i),
-                            currentDishCard));
+                    Optional<DishCard> currentDishCard = findDishCardFromMenuById(orderDish.getMenu_dish());
+
+                    if (currentDishCard.isPresent()) {
+                        threadPool.submit(new Cook(visitorOrderList.get(i), visitorOrderForLogList.get(i),
+                                currentDishCard.get()));
+                    }
                 }
 
                 var timeSimulationUntilNextOrder = ChronoUnit.MILLIS
@@ -96,10 +105,12 @@ public class Restaurant {
             } else {
                 for (OrderDish orderDish : visitorOrderList.get(i).getVis_ord_dishes()) {
 
-                    DishCard currentDishCard = findDishCardFromMenuById(orderDish.getMenu_dish());
+                    Optional<DishCard> currentDishCard = findDishCardFromMenuById(orderDish.getMenu_dish());
 
-                    threadPool.submit(new Cook(visitorOrderList.get(i), visitorOrderForLogList.get(i),
-                            currentDishCard));
+                    if (currentDishCard.isPresent()) {
+                        threadPool.submit(new Cook(visitorOrderList.get(i), visitorOrderForLogList.get(i),
+                                currentDishCard.get()));
+                    }
                 }
             }
         }

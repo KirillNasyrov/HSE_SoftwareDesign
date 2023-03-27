@@ -7,7 +7,6 @@ import goodman_screbber.model.dishCards.DishCard;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.concurrent.BlockingQueue;
 
 public class Cook implements Runnable {
     private VisitorOrderForLog currentVisitorOrderForLog;
