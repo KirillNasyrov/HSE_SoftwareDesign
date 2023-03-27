@@ -1,5 +1,7 @@
 package goodman_screbber.model.cook;
 
+import goodman_screbber.model.orderLog.OrderDishCardForLog;
+import goodman_screbber.model.orderLog.VisitorOrderForLog;
 import goodman_screbber.model.visitorOrders.VisitorOrder;
 import goodman_screbber.model.dishCards.DishCard;
 
@@ -8,25 +10,28 @@ import java.time.temporal.ChronoUnit;
 import java.util.concurrent.BlockingQueue;
 
 public class Cook implements Runnable {
+    private BlockingQueue<VisitorOrderForLog> orderForLogQueue;
+    private VisitorOrderForLog currentVisitorOrderForLog;
     private VisitorOrder currentVisitorOrder;
-    private DishCard currentDish;
-    private BlockingQueue<VisitorOrder> orderFinishQueue;
+    private DishCard currentDishCard;
     private Integer cook_id;
     private String cook_name;
     private boolean cook_active;
 
 
-    public Cook(DishCard currentDish, Integer cook_id, String cook_name, boolean cook_active) {
-        this.currentDish = currentDish;
+    public Cook(DishCard currentDishCard, Integer cook_id, String cook_name, boolean cook_active) {
+        this.currentDishCard = currentDishCard;
         this.cook_id = cook_id;
         this.cook_name = cook_name;
         this.cook_active = cook_active;
     }
 
-    public Cook(VisitorOrder currentVisitorOrder, DishCard currentDish, BlockingQueue<VisitorOrder> orderFinishQueue) {
+    public Cook(VisitorOrder currentVisitorOrder, VisitorOrderForLog currentVisitorOrderForLog,
+                DishCard currentDishCard, BlockingQueue<VisitorOrderForLog> orderForLogQueue) {
         this.currentVisitorOrder = currentVisitorOrder;
-        this.currentDish = currentDish;
-        this.orderFinishQueue = orderFinishQueue;
+        this.currentVisitorOrderForLog = currentVisitorOrderForLog;
+        this.currentDishCard = currentDishCard;
+        this.orderForLogQueue = orderForLogQueue;
     }
 
     public Cook() {
@@ -59,17 +64,31 @@ public class Cook implements Runnable {
     @Override
     public void run() {
         System.out.println("Start cooking order: " + currentVisitorOrder.getVis_name());
-        System.out.println("Start cooking dish: " + currentDish.getCard_descr());
+        System.out.println("Start cooking dish: " + currentDishCard.getCard_descr());
         try {
-            Thread.sleep(currentDish.getCard_time().intValue() * 1000L);
+
+            Thread.sleep(currentDishCard.getCard_time().intValue() * 1000L);
+
+            OrderDishCardForLog orderDishCardForLog = new OrderDishCardForLog(currentDishCard.getDish_name(),
+                    currentDishCard.getCard_id());
+
+            currentVisitorOrderForLog.addOrderDishCardForLog(orderDishCardForLog);
+
             if (currentVisitorOrder.decrementAndGetNumberOfNotCookingDishes() == 0) {
+
                 LocalDateTime finishCookingTime = LocalDateTime.now();
+
                 var durationOfCookingOrder = ChronoUnit.SECONDS.
                         between(currentVisitorOrder.getStartCookingRealTime(), finishCookingTime);
+
                 System.out.println("DONE " + currentVisitorOrder.getVis_name());
-                System.out.println(durationOfCookingOrder);
-                System.out.println(currentVisitorOrder.getVis_ord_started().plusSeconds(durationOfCookingOrder));
-                orderFinishQueue.add(currentVisitorOrder);
+                //System.out.println(durationOfCookingOrder);
+
+                LocalDateTime finished = currentVisitorOrder.getVis_ord_started().plusSeconds(durationOfCookingOrder);
+                System.out.println(finished);
+
+                currentVisitorOrderForLog.setVisitorOrderFinished(finished);
+                //orderForLogQueue.add(currentVisitorOrderForLog);
             }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
