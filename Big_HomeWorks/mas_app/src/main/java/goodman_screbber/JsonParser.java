@@ -19,26 +19,22 @@ public class JsonParser {
         objectMapper.registerModule(new JavaTimeModule());
     }
 
-    public ListOfVisitorOrders getListOfVisitorOrdersFromJson() throws IOException {
-        Path path = FileSystems.getDefault().getPath("src", "main","java", "goodman_screbber", "input", "visitors_orders.json");
+    public ListOfVisitorOrders getListOfVisitorOrdersFromJson(Path path) throws IOException {
         ListOfVisitorOrders listOfVisitorOrders = objectMapper.readValue(path.toFile(), ListOfVisitorOrders.class);
         return listOfVisitorOrders;
     }
 
-    public ListOfMenuDishes getListOfMenuDishesFromJson() throws IOException {
-        Path path = FileSystems.getDefault().getPath("src", "main","java", "goodman_screbber", "input", "menu_dishes.json");
+    public ListOfMenuDishes getListOfMenuDishesFromJson(Path path) throws IOException {
         ListOfMenuDishes listOfVisitorOrders = objectMapper.readValue(path.toFile(), ListOfMenuDishes.class);
         return listOfVisitorOrders;
     }
 
-    public ListOfDishCards getListOfDishCardsFromJson() throws IOException {
-        Path path = FileSystems.getDefault().getPath("src", "main","java", "goodman_screbber", "input", "dish_cards.json");
+    public ListOfDishCards getListOfDishCardsFromJson(Path path) throws IOException {
         ListOfDishCards listOfVisitorOrders = objectMapper.readValue(path.toFile(), ListOfDishCards.class);
         return listOfVisitorOrders;
     }
 
-    public ListOfCooks getListOfCooksFromJson() throws IOException {
-        Path path = FileSystems.getDefault().getPath("src", "main","java", "goodman_screbber", "input", "cooks.json");
+    public ListOfCooks getListOfCooksFromJson(Path path) throws IOException {
         ListOfCooks listOfCooks = objectMapper.readValue(path.toFile(), ListOfCooks.class);
         return listOfCooks;
     }

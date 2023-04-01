@@ -124,9 +124,15 @@ public class Restaurant {
                 }
             }
         }
+        writeJsonLogs();
+    }
+
+    /**
+     * Завершает работу ресторана
+     * @throws InterruptedException
+     */
+    public void stopWorking() throws InterruptedException {
         threadPool.shutdown();
         threadPool.awaitTermination(10, TimeUnit.SECONDS);
-
-        writeJsonLogs();
     }
 }
