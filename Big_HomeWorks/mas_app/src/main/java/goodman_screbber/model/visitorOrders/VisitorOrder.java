@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class VisitorOrder {
@@ -88,5 +89,38 @@ public class VisitorOrder {
 
     public void setVis_ord_dishes(List<OrderDish> vis_ord_dishes) {
         this.vis_ord_dishes = vis_ord_dishes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        VisitorOrder that = (VisitorOrder) o;
+
+        if (!Objects.equals(numberOfNotCookingDishes, that.numberOfNotCookingDishes))
+            return false;
+        if (!Objects.equals(startCookingRealTime, that.startCookingRealTime))
+            return false;
+        if (!Objects.equals(vis_name, that.vis_name)) return false;
+        if (!Objects.equals(vis_ord_started, that.vis_ord_started))
+            return false;
+        if (!Objects.equals(vis_ord_ended, that.vis_ord_ended))
+            return false;
+        if (!Objects.equals(vis_ord_total, that.vis_ord_total))
+            return false;
+        return Objects.equals(vis_ord_dishes, that.vis_ord_dishes);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = numberOfNotCookingDishes != null ? numberOfNotCookingDishes.hashCode() : 0;
+        result = 31 * result + (startCookingRealTime != null ? startCookingRealTime.hashCode() : 0);
+        result = 31 * result + (vis_name != null ? vis_name.hashCode() : 0);
+        result = 31 * result + (vis_ord_started != null ? vis_ord_started.hashCode() : 0);
+        result = 31 * result + (vis_ord_ended != null ? vis_ord_ended.hashCode() : 0);
+        result = 31 * result + (vis_ord_total != null ? vis_ord_total.hashCode() : 0);
+        result = 31 * result + (vis_ord_dishes != null ? vis_ord_dishes.hashCode() : 0);
+        return result;
     }
 }

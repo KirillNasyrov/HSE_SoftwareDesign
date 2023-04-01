@@ -6,7 +6,11 @@ import goodman_screbber.model.dishCards.DishCard;
 import goodman_screbber.model.dishCards.DishCardsOperations;
 import goodman_screbber.model.dishCards.DishCardsOperationsProducts;
 import goodman_screbber.model.dishCards.ListOfDishCards;
+import goodman_screbber.model.menu.ListOfMenuDishes;
+import goodman_screbber.model.menu.MenuDish;
 import goodman_screbber.model.visitorOrders.ListOfVisitorOrders;
+import goodman_screbber.model.visitorOrders.OrderDish;
+import goodman_screbber.model.visitorOrders.VisitorOrder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,26 +18,132 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class JsonParserTest {
 
     @Test
-    void getListOfVisitorOrdersFromJson() {
-        JsonParser jsonParser = new JsonParser();
+    void getListOfVisitorOrdersFromJsonTestCorrectJson() throws IOException {
+        OrderDish originalOrderDish1 = new OrderDish(625, 28);
+        OrderDish originalOrderDish2 = new OrderDish(626, 28);
+        OrderDish originalOrderDish3 = new OrderDish(627, 28);
 
+
+        VisitorOrder originalVisitorOrder1 = new VisitorOrder();
+        originalVisitorOrder1.setVis_name("Visitor123");
+        originalVisitorOrder1.setVis_ord_started(LocalDateTime.parse("2023-02-28T10:12:15"));
+        originalVisitorOrder1.setVis_ord_ended(null);
+        originalVisitorOrder1.setVis_ord_total(118);
+        originalVisitorOrder1.setVis_ord_dishes(List.of(originalOrderDish1, originalOrderDish2));
+
+
+        VisitorOrder originalVisitorOrder2 = new VisitorOrder();
+        originalVisitorOrder2.setVis_name("Visitor124");
+        originalVisitorOrder2.setVis_ord_started(LocalDateTime.parse("2023-02-28T10:12:05"));
+        originalVisitorOrder2.setVis_ord_ended(null);
+        originalVisitorOrder2.setVis_ord_total(59);
+        originalVisitorOrder2.setVis_ord_dishes(List.of(originalOrderDish3));
+
+
+        ListOfVisitorOrders originalListOfVisitorOrders = new ListOfVisitorOrders();
+        originalListOfVisitorOrders.setVisitors_orders(List.of(originalVisitorOrder1, originalVisitorOrder2));
+
+        ListOfVisitorOrders testListOfVisitorOrders;
+        JsonParser jsonParser = new JsonParser();
+        Path path = FileSystems.getDefault().getPath("src/test/resources/inputForTest/visitorOrdersJsonsForTest/visitors_orders.json");
+        testListOfVisitorOrders = jsonParser.getListOfVisitorOrdersFromJson(path);
+        Assertions.assertEquals(testListOfVisitorOrders, originalListOfVisitorOrders);
     }
 
     @Test
-    void getListOfMenuDishesFromJson() {
+    void getListOfVisitorOrdersFromJsonTestNotCorrectJson() throws IOException {
+        OrderDish originalOrderDish1 = new OrderDish(625, 28);
+        OrderDish originalOrderDish2 = new OrderDish(626, 28);
+        OrderDish originalOrderDish3 = new OrderDish(627, 28);
 
+
+        VisitorOrder originalVisitorOrder1 = new VisitorOrder();
+        originalVisitorOrder1.setVis_name("Visitor123");
+        originalVisitorOrder1.setVis_ord_started(LocalDateTime.parse("2023-02-28T10:12:15"));
+        originalVisitorOrder1.setVis_ord_ended(null);
+        originalVisitorOrder1.setVis_ord_total(118);
+        originalVisitorOrder1.setVis_ord_dishes(List.of(originalOrderDish1, originalOrderDish2));
+
+
+        VisitorOrder originalVisitorOrder2 = new VisitorOrder();
+        originalVisitorOrder2.setVis_name("Visitor128");
+        originalVisitorOrder2.setVis_ord_started(LocalDateTime.parse("2023-02-28T10:12:05"));
+        originalVisitorOrder2.setVis_ord_ended(null);
+        originalVisitorOrder2.setVis_ord_total(53);
+        originalVisitorOrder2.setVis_ord_dishes(List.of(originalOrderDish3));
+
+
+        ListOfVisitorOrders originalListOfVisitorOrders = new ListOfVisitorOrders();
+        originalListOfVisitorOrders.setVisitors_orders(List.of(originalVisitorOrder1, originalVisitorOrder2));
+
+        ListOfVisitorOrders testListOfVisitorOrders;
+        JsonParser jsonParser = new JsonParser();
+        Path path = FileSystems.getDefault().getPath("src/test/resources/inputForTest/visitorOrdersJsonsForTest/visitors_orders.json");
+        testListOfVisitorOrders = jsonParser.getListOfVisitorOrdersFromJson(path);
+        Assertions.assertNotEquals(testListOfVisitorOrders, originalListOfVisitorOrders);
+    }
+
+    @Test
+    void getListOfMenuDishesFromJsonTestCorrectJson() throws IOException {
+        MenuDish originalMenuDish1 = new MenuDish();
+        originalMenuDish1.setMenu_dish_id(28);
+        originalMenuDish1.setMenu_dish_card(518);
+        originalMenuDish1.setMenu_dish_price(59);
+        originalMenuDish1.setMenu_dish_active(true);
+
+
+        MenuDish originalMenuDish2 = new MenuDish();
+        originalMenuDish2.setMenu_dish_id(34);
+        originalMenuDish2.setMenu_dish_card(145);
+        originalMenuDish2.setMenu_dish_price(100);
+        originalMenuDish2.setMenu_dish_active(true);
+
+
+        ListOfMenuDishes originalListOfMenuDishes = new ListOfMenuDishes();
+        originalListOfMenuDishes.setMenu_dishes(List.of(originalMenuDish1, originalMenuDish2));
+
+        ListOfMenuDishes testListOfMenuDishes;
+        JsonParser jsonParser = new JsonParser();
+        Path path = FileSystems.getDefault().getPath("src/test/resources/inputForTest/menuDishesJsonsForTest/menu_dishes.json");
+        testListOfMenuDishes = jsonParser.getListOfMenuDishesFromJson(path);
+        Assertions.assertEquals(testListOfMenuDishes, originalListOfMenuDishes);
+    }
+
+    @Test
+    void getListOfMenuDishesFromJsonTestNotCorrectJson() throws IOException {
+        MenuDish originalMenuDish1 = new MenuDish();
+        originalMenuDish1.setMenu_dish_id(28);
+        originalMenuDish1.setMenu_dish_card(534);
+        originalMenuDish1.setMenu_dish_price(59);
+        originalMenuDish1.setMenu_dish_active(true);
+
+
+        MenuDish originalMenuDish2 = new MenuDish();
+        originalMenuDish2.setMenu_dish_id(34);
+        originalMenuDish2.setMenu_dish_card(36);
+        originalMenuDish2.setMenu_dish_price(100);
+        originalMenuDish2.setMenu_dish_active(false);
+
+
+        ListOfMenuDishes originalListOfMenuDishes = new ListOfMenuDishes();
+        originalListOfMenuDishes.setMenu_dishes(List.of(originalMenuDish1, originalMenuDish2));
+
+        ListOfMenuDishes testListOfMenuDishes;
+        JsonParser jsonParser = new JsonParser();
+        Path path = FileSystems.getDefault().getPath("src/test/resources/inputForTest/menuDishesJsonsForTest/menu_dishes.json");
+        testListOfMenuDishes = jsonParser.getListOfMenuDishesFromJson(path);
+        Assertions.assertNotEquals(testListOfMenuDishes, originalListOfMenuDishes);
     }
 
     @Test()
-    void testGetListOfDishCardsFromJsonShouldReturnTrue() throws IOException {
+    void testGetListOfDishCardsFromJsonTestCorrectJson() throws IOException {
         JsonParser jsonParser = new JsonParser();
         Path path = FileSystems.getDefault().getPath("src", "test", "resources", "inputForTest", "dishCardsJsonsForTest", "dish_cards.json");
         var listOfDishCards = jsonParser.getListOfDishCardsFromJson(path);
@@ -64,7 +174,7 @@ class JsonParserTest {
     @Test()
     @DisplayName("test get ListOfDishCards From Json " +
             "and compare it with other not equals ListOfDishCards object should return false")
-    void testGetListOfDishCardsFromJsonShouldReturnFalse() throws IOException {
+    void testGetListOfDishCardsFromJsonTestNotCorrectJson() throws IOException {
         JsonParser jsonParser = new JsonParser();
         Path path = FileSystems.getDefault().getPath("src", "test", "resources", "inputForTest", "dishCardsJsonsForTest", "dish_cards.json");
         var listOfDishCards = jsonParser.getListOfDishCardsFromJson(path);
@@ -95,7 +205,7 @@ class JsonParserTest {
     @Test
     @DisplayName("test get ListOfCooksFrom From Json " +
             "and compare it with other not equals ListOfCooksFrom object should return false")
-    void testGetListOfCooksFromJsonShouldReturnTrue() throws IOException {
+    void testGetListOfCooksFromJsonTestCorrectJson() throws IOException {
         JsonParser jsonParser = new JsonParser();
         Path path = FileSystems.getDefault().getPath("src", "test", "resources", "inputForTest", "cooksJsonsForTest", "cooks.json");
         var listOfCooksFromJson = jsonParser.getListOfCooksFromJson(path);
@@ -110,7 +220,7 @@ class JsonParserTest {
     }
 
     @Test
-    void testGetListOfCooksFromJsonShouldReturnFalse() throws IOException {
+    void testGetListOfCooksFromJsonTestNotCorrectJson() throws IOException {
         JsonParser jsonParser = new JsonParser();
         Path path = FileSystems.getDefault().getPath("src", "test", "resources", "inputForTest", "cooksJsonsForTest", "cooks.json");
         var listOfCooksFromJson = jsonParser.getListOfCooksFromJson(path);

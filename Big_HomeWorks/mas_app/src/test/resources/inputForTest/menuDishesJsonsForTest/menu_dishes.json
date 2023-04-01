@@ -4,6 +4,12 @@
     "menu_dish_card": 518,
     "menu_dish_price": 59,
     "menu_dish_active": true
-  }
+  },
+    {
+      "menu_dish_id": 34,
+      "menu_dish_card": 145,
+      "menu_dish_price": 100,
+      "menu_dish_active": true
+    }
   ]
 }
