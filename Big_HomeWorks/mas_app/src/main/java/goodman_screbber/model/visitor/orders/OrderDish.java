@@ -1,6 +1,4 @@
-package goodman_screbber.model.visitorOrders;
-
-import goodman_screbber.model.Restaurant;
+package goodman_screbber.model.visitor.orders;
 
 import java.util.Objects;
 

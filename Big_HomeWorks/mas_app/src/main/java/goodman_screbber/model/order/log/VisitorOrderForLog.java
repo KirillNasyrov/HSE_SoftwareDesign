@@ -1,4 +1,4 @@
-package goodman_screbber.model.orderLog;
+package goodman_screbber.model.order.log;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.BlockingQueue;

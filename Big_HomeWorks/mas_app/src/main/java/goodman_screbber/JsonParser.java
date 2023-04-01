@@ -3,9 +3,9 @@ package goodman_screbber;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import goodman_screbber.model.cook.ListOfCooks;
-import goodman_screbber.model.dishCards.ListOfDishCards;
+import goodman_screbber.model.dish.cards.ListOfDishCards;
 import goodman_screbber.model.menu.ListOfMenuDishes;
-import goodman_screbber.model.visitorOrders.ListOfVisitorOrders;
+import goodman_screbber.model.visitor.orders.ListOfVisitorOrders;
 
 import java.io.IOException;
 import java.nio.file.Path;

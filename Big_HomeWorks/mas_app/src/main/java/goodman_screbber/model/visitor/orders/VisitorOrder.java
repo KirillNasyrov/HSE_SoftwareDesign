@@ -1,4 +1,4 @@
-package goodman_screbber.model.visitorOrders;
+package goodman_screbber.model.visitor.orders;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,6 +16,7 @@ public class VisitorOrder {
     private String vis_name;
     private LocalDateTime vis_ord_started;
     private LocalDateTime vis_ord_ended;
+
     private Integer vis_ord_total;
     private List<OrderDish> vis_ord_dishes;
 

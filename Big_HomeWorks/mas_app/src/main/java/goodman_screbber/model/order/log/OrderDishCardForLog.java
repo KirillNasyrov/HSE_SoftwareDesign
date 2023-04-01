@@ -1,4 +1,4 @@
-package goodman_screbber.model.orderLog;
+package goodman_screbber.model.order.log;
 
 
 public class OrderDishCardForLog {

@@ -1,4 +1,4 @@
-package goodman_screbber.model.orderLog;
+package goodman_screbber.model.order.log;
 
 public class NotFoundDishCardErrorForLog {
     private String error = "No card of such dish from menu";

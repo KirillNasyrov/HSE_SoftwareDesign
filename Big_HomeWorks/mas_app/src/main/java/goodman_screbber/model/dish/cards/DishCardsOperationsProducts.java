@@ -1,4 +1,4 @@
-package goodman_screbber.model.dishCards;
+package goodman_screbber.model.dish.cards;
 
 public class DishCardsOperationsProducts {
     Integer prod_type;

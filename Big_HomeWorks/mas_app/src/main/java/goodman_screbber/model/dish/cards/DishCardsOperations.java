@@ -1,8 +1,7 @@
-package goodman_screbber.model.dishCards;
+package goodman_screbber.model.dish.cards;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class DishCardsOperations {
     private Integer oper_type;

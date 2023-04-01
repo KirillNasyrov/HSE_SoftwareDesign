@@ -1,4 +1,4 @@
-package goodman_screbber.model.visitorOrders;
+package goodman_screbber.model.visitor.orders;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,9 @@
 package goodman_screbber.model.cook;
 
-import goodman_screbber.model.orderLog.OrderDishCardForLog;
-import goodman_screbber.model.orderLog.VisitorOrderForLog;
-import goodman_screbber.model.visitorOrders.VisitorOrder;
-import goodman_screbber.model.dishCards.DishCard;
+import goodman_screbber.model.order.log.OrderDishCardForLog;
+import goodman_screbber.model.order.log.VisitorOrderForLog;
+import goodman_screbber.model.visitor.orders.VisitorOrder;
+import goodman_screbber.model.dish.cards.DishCard;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
