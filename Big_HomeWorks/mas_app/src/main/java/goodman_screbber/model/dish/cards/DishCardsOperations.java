@@ -1,64 +1,76 @@
 package goodman_screbber.model.dish.cards;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class DishCardsOperations {
-    private Integer oper_type;
-    private Integer equip_type;
-    private Double oper_time;
-    private Integer oper_async_point;
-    private List<DishCardsOperationsProducts> oper_products;
 
-    public DishCardsOperations(Integer oper_type, Integer equip_type, Double oper_time, Integer oper_async_point, List<DishCardsOperationsProducts> oper_products) {
-        this.oper_type = oper_type;
-        this.equip_type = equip_type;
-        this.oper_time = oper_time;
-        this.oper_async_point = oper_async_point;
-        this.oper_products = oper_products;
+    @JsonProperty("oper_type")
+    private Integer operationType;
+
+    @JsonProperty("equip_type")
+    private Integer equipmentType;
+
+    @JsonProperty("oper_time")
+    private Double operationTime;
+
+    @JsonProperty("oper_async_point")
+    private Integer operationAsyncPoint;
+
+    @JsonProperty("oper_products")
+    private List<DishCardsOperationsProducts> operationProducts;
+
+    public DishCardsOperations(Integer operationType, Integer equipmentType, Double operationTime, Integer operationAsyncPoint, List<DishCardsOperationsProducts> operationProducts) {
+        this.operationType = operationType;
+        this.equipmentType = equipmentType;
+        this.operationTime = operationTime;
+        this.operationAsyncPoint = operationAsyncPoint;
+        this.operationProducts = operationProducts;
     }
 
     public DishCardsOperations() {
     }
 
-    public Integer getEquip_type() {
-        return equip_type;
+    public Integer getEquipmentType() {
+        return equipmentType;
     }
 
-    public void setEquip_type(Integer equip_type) {
-        this.equip_type = equip_type;
+    public void setEquipmentType(Integer equipmentType) {
+        this.equipmentType = equipmentType;
     }
 
-    public Integer getOper_type() {
-        return oper_type;
+    public Integer getOperationType() {
+        return operationType;
     }
 
-    public void setOper_type(Integer oper_type) {
-        this.oper_type = oper_type;
+    public void setOperationType(Integer operationType) {
+        this.operationType = operationType;
     }
 
-    public Double getOper_time() {
-        return oper_time;
+    public Double getOperationTime() {
+        return operationTime;
     }
 
-    public void setOper_time(Double oper_time) {
-        this.oper_time = oper_time;
+    public void setOperationTime(Double operationTime) {
+        this.operationTime = operationTime;
     }
 
-    public Integer getOper_async_point() {
-        return oper_async_point;
+    public Integer getOperationAsyncPoint() {
+        return operationAsyncPoint;
     }
 
-    public void setOper_async_point(Integer oper_async_point) {
-        this.oper_async_point = oper_async_point;
+    public void setOperationAsyncPoint(Integer operationAsyncPoint) {
+        this.operationAsyncPoint = operationAsyncPoint;
     }
 
-    public List<DishCardsOperationsProducts> getOper_products() {
-        return new ArrayList<>(oper_products);
+    public List<DishCardsOperationsProducts> getOperationProducts() {
+        return new ArrayList<>(operationProducts);
     }
 
-    public void setOper_products(List<DishCardsOperationsProducts> oper_products) {
-        this.oper_products = new ArrayList<>(oper_products);
+    public void setOperationProducts(List<DishCardsOperationsProducts> operationProducts) {
+        this.operationProducts = new ArrayList<>(operationProducts);
     }
 
     @Override
@@ -66,20 +78,20 @@ public class DishCardsOperations {
         if (this == o) return true;
         if (!(o instanceof DishCardsOperations that)) return false;
 
-        if (!oper_type.equals(that.oper_type)) return false;
-        if (!equip_type.equals(that.equip_type)) return false;
-        if (!oper_time.equals(that.oper_time)) return false;
-        if (!oper_async_point.equals(that.oper_async_point)) return false;
-        return oper_products.equals(that.oper_products);
+        if (!operationType.equals(that.operationType)) return false;
+        if (!equipmentType.equals(that.equipmentType)) return false;
+        if (!operationTime.equals(that.operationTime)) return false;
+        if (!operationAsyncPoint.equals(that.operationAsyncPoint)) return false;
+        return operationProducts.equals(that.operationProducts);
     }
 
     @Override
     public int hashCode() {
-        int result = oper_type.hashCode();
-        result = 31 * result + equip_type.hashCode();
-        result = 31 * result + oper_time.hashCode();
-        result = 31 * result + oper_async_point.hashCode();
-        result = 31 * result + oper_products.hashCode();
+        int result = operationType.hashCode();
+        result = 31 * result + equipmentType.hashCode();
+        result = 31 * result + operationTime.hashCode();
+        result = 31 * result + operationAsyncPoint.hashCode();
+        result = 31 * result + operationProducts.hashCode();
         return result;
     }
 }

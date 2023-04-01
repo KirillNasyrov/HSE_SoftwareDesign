@@ -93,21 +93,21 @@ class JsonParserTest {
     @Test
     void getListOfMenuDishesFromJsonTestCorrectJson() throws IOException {
         MenuDish originalMenuDish1 = new MenuDish();
-        originalMenuDish1.setMenu_dish_id(28);
-        originalMenuDish1.setMenu_dish_card(518);
-        originalMenuDish1.setMenu_dish_price(59);
-        originalMenuDish1.setMenu_dish_active(true);
+        originalMenuDish1.setMenuDishId(28);
+        originalMenuDish1.setMenuDishCard(518);
+        originalMenuDish1.setMenuDishPrice(59);
+        originalMenuDish1.setMenuDishActive(true);
 
 
         MenuDish originalMenuDish2 = new MenuDish();
-        originalMenuDish2.setMenu_dish_id(34);
-        originalMenuDish2.setMenu_dish_card(145);
-        originalMenuDish2.setMenu_dish_price(100);
-        originalMenuDish2.setMenu_dish_active(true);
+        originalMenuDish2.setMenuDishId(34);
+        originalMenuDish2.setMenuDishCard(145);
+        originalMenuDish2.setMenuDishPrice(100);
+        originalMenuDish2.setMenuDishActive(true);
 
 
         ListOfMenuDishes originalListOfMenuDishes = new ListOfMenuDishes();
-        originalListOfMenuDishes.setMenu_dishes(List.of(originalMenuDish1, originalMenuDish2));
+        originalListOfMenuDishes.setMenuDishes(List.of(originalMenuDish1, originalMenuDish2));
 
         ListOfMenuDishes testListOfMenuDishes;
         JsonParser jsonParser = new JsonParser();
@@ -119,21 +119,21 @@ class JsonParserTest {
     @Test
     void getListOfMenuDishesFromJsonTestNotCorrectJson() throws IOException {
         MenuDish originalMenuDish1 = new MenuDish();
-        originalMenuDish1.setMenu_dish_id(28);
-        originalMenuDish1.setMenu_dish_card(534);
-        originalMenuDish1.setMenu_dish_price(59);
-        originalMenuDish1.setMenu_dish_active(true);
+        originalMenuDish1.setMenuDishId(28);
+        originalMenuDish1.setMenuDishCard(534);
+        originalMenuDish1.setMenuDishPrice(59);
+        originalMenuDish1.setMenuDishActive(true);
 
 
         MenuDish originalMenuDish2 = new MenuDish();
-        originalMenuDish2.setMenu_dish_id(34);
-        originalMenuDish2.setMenu_dish_card(36);
-        originalMenuDish2.setMenu_dish_price(100);
-        originalMenuDish2.setMenu_dish_active(false);
+        originalMenuDish2.setMenuDishId(34);
+        originalMenuDish2.setMenuDishCard(36);
+        originalMenuDish2.setMenuDishPrice(100);
+        originalMenuDish2.setMenuDishActive(false);
 
 
         ListOfMenuDishes originalListOfMenuDishes = new ListOfMenuDishes();
-        originalListOfMenuDishes.setMenu_dishes(List.of(originalMenuDish1, originalMenuDish2));
+        originalListOfMenuDishes.setMenuDishes(List.of(originalMenuDish1, originalMenuDish2));
 
         ListOfMenuDishes testListOfMenuDishes;
         JsonParser jsonParser = new JsonParser();

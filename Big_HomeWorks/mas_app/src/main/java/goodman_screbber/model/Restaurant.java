@@ -39,7 +39,7 @@ public class Restaurant {
                       ListOfDishCards listOfDishCards, ListOfCooks listOfCooks) {
 
         this.listOfCooks = listOfCooks;
-        threadPool = Executors.newFixedThreadPool(listOfCooks.getCookers().size());
+        threadPool = Executors.newFixedThreadPool(listOfCooks.getCooks().size());
         visitorOrderList.addAll(listOfOrders.getVisitors_orders());
         visitorOrderList.sort(Comparator.comparing(VisitorOrder::getVis_ord_started));
 
@@ -64,11 +64,11 @@ public class Restaurant {
      * @param menuId id меню
      */
     public Optional<DishCard> findDishCardFromMenuById(Integer menuId) {
-        for (MenuDish menuDish : listOfMenuDishes.getMenu_dishes()) {
-            if (menuDish.getMenu_dish_id() == menuId) {
-                Integer menuDishCardId = menuDish.getMenu_dish_card();
-                for (var dishCard : listOfDishCards.getDish_cards()) {
-                    if (dishCard.getCard_id().equals(menuDishCardId)) {
+        for (MenuDish menuDish : listOfMenuDishes.getMenuDishes()) {
+            if (menuDish.getMenuDishId() == menuId) {
+                Integer menuDishCardId = menuDish.getMenuDishCard();
+                for (var dishCard : listOfDishCards.getDishCards()) {
+                    if (dishCard.getCardId().equals(menuDishCardId)) {
                         return Optional.of(dishCard);
                     }
                 }

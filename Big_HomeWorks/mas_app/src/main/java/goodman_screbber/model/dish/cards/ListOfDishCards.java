@@ -1,24 +1,27 @@
 package goodman_screbber.model.dish.cards;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListOfDishCards {
-    private List<DishCard> dish_cards;
+    @JsonProperty("dish_cards")
+    private List<DishCard> dishCards;
 
-    public ListOfDishCards(List<DishCard> dish_cards) {
-        this.dish_cards = new ArrayList<>(dish_cards);
+    public ListOfDishCards(List<DishCard> dishCards) {
+        this.dishCards = new ArrayList<>(dishCards);
     }
 
     public ListOfDishCards() {
     }
 
-    public List<DishCard> getDish_cards() {
-        return new ArrayList<>(dish_cards);
+    public List<DishCard> getDishCards() {
+        return new ArrayList<>(dishCards);
     }
 
-    public void setDish_cards(List<DishCard> dish_cards) {
-        this.dish_cards = new ArrayList<>(dish_cards);
+    public void setDishCards(List<DishCard> dishCards) {
+        this.dishCards = new ArrayList<>(dishCards);
     }
 
     @Override
@@ -26,11 +29,11 @@ public class ListOfDishCards {
         if (this == o) return true;
         if (!(o instanceof ListOfDishCards that)) return false;
 
-        return dish_cards.equals(that.dish_cards);
+        return dishCards.equals(that.dishCards);
     }
 
     @Override
     public int hashCode() {
-        return dish_cards.hashCode();
+        return dishCards.hashCode();
     }
 }

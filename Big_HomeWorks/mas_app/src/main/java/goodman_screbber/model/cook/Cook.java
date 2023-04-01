@@ -1,5 +1,6 @@
 package goodman_screbber.model.cook;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import goodman_screbber.model.order.log.OrderDishCardForLog;
 import goodman_screbber.model.order.log.VisitorOrderForLog;
 import goodman_screbber.model.visitor.orders.VisitorOrder;
@@ -12,15 +13,21 @@ public class Cook implements Runnable {
     private VisitorOrderForLog currentVisitorOrderForLog;
     private VisitorOrder currentVisitorOrder;
     private DishCard currentDishCard;
-    private Integer cook_id;
-    private String cook_name;
-    private boolean cook_active;
 
-    public Cook(DishCard currentDishCard, Integer cook_id, String cook_name, boolean cook_active) {
+    @JsonProperty("cook_id")
+    private Integer cookId;
+
+    @JsonProperty("cook_name")
+    private String cookName;
+
+    @JsonProperty("cook_active")
+    private boolean cookActive;
+
+    public Cook(DishCard currentDishCard, Integer cookId, String cookName, boolean cookActive) {
         this.currentDishCard = currentDishCard;
-        this.cook_id = cook_id;
-        this.cook_name = cook_name;
-        this.cook_active = cook_active;
+        this.cookId = cookId;
+        this.cookName = cookName;
+        this.cookActive = cookActive;
     }
 
     public Cook(VisitorOrder currentVisitorOrder, VisitorOrderForLog currentVisitorOrderForLog,
@@ -30,37 +37,37 @@ public class Cook implements Runnable {
         this.currentDishCard = currentDishCard;
     }
 
-    public Cook(Integer cook_id, String cook_name, boolean cook_active) {
-        this.cook_id = cook_id;
-        this.cook_name = cook_name;
-        this.cook_active = cook_active;
+    public Cook(Integer cookId, String cookName, boolean cookActive) {
+        this.cookId = cookId;
+        this.cookName = cookName;
+        this.cookActive = cookActive;
     }
 
     public Cook() {
     }
 
-    public Integer getCook_id() {
-        return cook_id;
+    public Integer getCookId() {
+        return cookId;
     }
 
-    public void setCook_id(Integer cook_id) {
-        this.cook_id = cook_id;
+    public void setCookId(Integer cookId) {
+        this.cookId = cookId;
     }
 
-    public String getCook_name() {
-        return cook_name;
+    public String getCookName() {
+        return cookName;
     }
 
-    public void setCook_name(String cook_name) {
-        this.cook_name = cook_name;
+    public void setCookName(String cookName) {
+        this.cookName = cookName;
     }
 
-    public boolean isCook_active() {
-        return cook_active;
+    public boolean isCookActive() {
+        return cookActive;
     }
 
-    public void setCook_active(boolean cook_active) {
-        this.cook_active = cook_active;
+    public void setCookActive(boolean cookActive) {
+        this.cookActive = cookActive;
     }
 
     /**
@@ -73,10 +80,10 @@ public class Cook implements Runnable {
         System.out.println("Start cooking dish: " + currentDishCard.getCard_descr());
         try {
 
-            Thread.sleep(currentDishCard.getCard_time().intValue() * 1000L);
+            Thread.sleep(currentDishCard.getCardTime().intValue() * 1000L);
 
-            OrderDishCardForLog orderDishCardForLog = new OrderDishCardForLog(currentDishCard.getDish_name(),
-                    currentDishCard.getCard_id());
+            OrderDishCardForLog orderDishCardForLog = new OrderDishCardForLog(currentDishCard.getDishName(),
+                    currentDishCard.getCardId());
 
 
             currentVisitorOrderForLog.addOrderDishCardForLog(orderDishCardForLog);
@@ -105,16 +112,16 @@ public class Cook implements Runnable {
         if (this == o) return true;
         if (!(o instanceof Cook cook)) return false;
 
-        if (cook_active != cook.cook_active) return false;
-        if (!cook_id.equals(cook.cook_id)) return false;
-        return cook_name.equals(cook.cook_name);
+        if (cookActive != cook.cookActive) return false;
+        if (!cookId.equals(cook.cookId)) return false;
+        return cookName.equals(cook.cookName);
     }
 
     @Override
     public int hashCode() {
-        int result = cook_id.hashCode();
-        result = 31 * result + cook_name.hashCode();
-        result = 31 * result + (cook_active ? 1 : 0);
+        int result = cookId.hashCode();
+        result = 31 * result + cookName.hashCode();
+        result = 31 * result + (cookActive ? 1 : 0);
         return result;
     }
 }

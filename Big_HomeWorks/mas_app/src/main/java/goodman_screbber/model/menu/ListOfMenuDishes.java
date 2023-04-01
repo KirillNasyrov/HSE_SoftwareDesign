@@ -1,25 +1,29 @@
 package goodman_screbber.model.menu;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class ListOfMenuDishes {
-    public List<MenuDish> menu_dishes;
 
-    public ListOfMenuDishes(List<MenuDish> menu_dishes) {
-        this.menu_dishes = new ArrayList<>(menu_dishes);
+    @JsonProperty("menu_dishes")
+    public List<MenuDish> menuDishes;
+
+    public ListOfMenuDishes(List<MenuDish> menuDishes) {
+        this.menuDishes = new ArrayList<>(menuDishes);
     }
 
     public ListOfMenuDishes() {
     }
 
-    public List<MenuDish> getMenu_dishes() {
-        return new ArrayList<>(menu_dishes);
+    public List<MenuDish> getMenuDishes() {
+        return new ArrayList<>(menuDishes);
     }
 
-    public void setMenu_dishes(List<MenuDish> menu_dishes) {
-        this.menu_dishes = new ArrayList<>(menu_dishes);
+    public void setMenuDishes(List<MenuDish> menuDishes) {
+        this.menuDishes = new ArrayList<>(menuDishes);
     }
 
     @Override
@@ -29,11 +33,11 @@ public class ListOfMenuDishes {
 
         ListOfMenuDishes that = (ListOfMenuDishes) o;
 
-        return Objects.equals(menu_dishes, that.menu_dishes);
+        return Objects.equals(menuDishes, that.menuDishes);
     }
 
     @Override
     public int hashCode() {
-        return menu_dishes != null ? menu_dishes.hashCode() : 0;
+        return menuDishes != null ? menuDishes.hashCode() : 0;
     }
 }
