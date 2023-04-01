@@ -30,6 +30,12 @@ public class Cook implements Runnable {
         this.currentDishCard = currentDishCard;
     }
 
+    public Cook(Integer cook_id, String cook_name, boolean cook_active) {
+        this.cook_id = cook_id;
+        this.cook_name = cook_name;
+        this.cook_active = cook_active;
+    }
+
     public Cook() {
     }
 
@@ -92,5 +98,23 @@ public class Cook implements Runnable {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cook cook)) return false;
+
+        if (cook_active != cook.cook_active) return false;
+        if (!cook_id.equals(cook.cook_id)) return false;
+        return cook_name.equals(cook.cook_name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = cook_id.hashCode();
+        result = 31 * result + cook_name.hashCode();
+        result = 31 * result + (cook_active ? 1 : 0);
+        return result;
     }
 }

@@ -27,4 +27,20 @@ public class DishCardsOperationsProducts {
     public void setProd_quantity(Integer prod_quantity) {
         this.prod_quantity = prod_quantity;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DishCardsOperationsProducts that)) return false;
+
+        if (!prod_type.equals(that.prod_type)) return false;
+        return prod_quantity.equals(that.prod_quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = prod_type.hashCode();
+        result = 31 * result + prod_quantity.hashCode();
+        return result;
+    }
 }

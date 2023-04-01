@@ -71,4 +71,28 @@ public class DishCard {
     public void setOperations(List<DishCardsOperations> operations) {
         this.operations = new ArrayList<>(operations);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DishCard dishCard)) return false;
+
+        if (!card_id.equals(dishCard.card_id)) return false;
+        if (!dish_name.equals(dishCard.dish_name)) return false;
+        if (!card_descr.equals(dishCard.card_descr)) return false;
+        if (!card_time.equals(dishCard.card_time)) return false;
+        if (!equip_type.equals(dishCard.equip_type)) return false;
+        return operations.equals(dishCard.operations);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = card_id.hashCode();
+        result = 31 * result + dish_name.hashCode();
+        result = 31 * result + card_descr.hashCode();
+        result = 31 * result + card_time.hashCode();
+        result = 31 * result + equip_type.hashCode();
+        result = 31 * result + operations.hashCode();
+        return result;
+    }
 }
