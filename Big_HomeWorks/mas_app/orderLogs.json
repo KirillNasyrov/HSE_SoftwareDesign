@@ -1,0 +1,22 @@
+[ {
+  "nameOfVisitor" : " Visitor124",
+  "visitorOrderStarted" : "2023-02-28T10:12:05",
+  "visitorOrderFinished" : "2023-02-28T10:12:08",
+  "dishesOfOrder" : [ {
+    "nameOfDish" : "Princess Nuri tea bag in a paper cup",
+    "carIdOfDish" : 518
+  } ]
+}, {
+  "nameOfVisitor" : " Visitor125",
+  "visitorOrderStarted" : "2023-02-28T10:12:09",
+  "visitorOrderFinished" : "2023-02-28T10:12:12",
+  "dishesOfOrder" : [ {
+    "nameOfDish" : "Princess Nuri tea bag in a paper cup",
+    "carIdOfDish" : 518
+  } ]
+}, {
+  "nameOfVisitor" : " Visitor123",
+  "visitorOrderStarted" : "2023-02-28T10:12:15",
+  "visitorOrderFinished" : null,
+  "dishesOfOrder" : [ ]
+} ]

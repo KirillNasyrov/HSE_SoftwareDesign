@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="goodman_screbber.JsonParserTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2023-04-01T13:56:21" hostname="HEISENBERG" time="0.328">
+  <properties/>
+  <testcase name="test get ListOfCooksFrom From Json and compare it with other not equals ListOfCooksFrom object should return false" classname="goodman_screbber.JsonParserTest" time="0.275"/>
+  <testcase name="test get ListOfDishCards From Json and compare it with other not equals ListOfDishCards object should return false" classname="goodman_screbber.JsonParserTest" time="0.01"/>
+  <testcase name="testGetListOfDishCardsFromJsonTestCorrectJson()" classname="goodman_screbber.JsonParserTest" time="0.006"/>
+  <testcase name="getListOfMenuDishesFromJsonTestNotCorrectJson()" classname="goodman_screbber.JsonParserTest" time="0.004"/>
+  <testcase name="getListOfVisitorOrdersFromJsonTestNotCorrectJson()" classname="goodman_screbber.JsonParserTest" time="0.012"/>
+  <testcase name="testGetListOfCooksFromJsonTestNotCorrectJson()" classname="goodman_screbber.JsonParserTest" time="0.002"/>
+  <testcase name="getListOfVisitorOrdersFromJsonTestCorrectJson()" classname="goodman_screbber.JsonParserTest" time="0.004"/>
+  <testcase name="getListOfMenuDishesFromJsonTestCorrectJson()" classname="goodman_screbber.JsonParserTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
