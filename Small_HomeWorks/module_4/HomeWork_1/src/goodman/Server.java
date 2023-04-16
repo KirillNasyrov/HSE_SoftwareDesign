@@ -3,24 +3,44 @@ package goodman;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Server {
 
-    public static final int PORT = 8080;
-    public static List<ServerHandler> serverList = new ArrayList<>();
+    private ServerSocket serverSocket;
 
-    public static void main(String[] args) throws IOException {
-        try (ServerSocket server = new ServerSocket(PORT)) {
-            while (true) {
-                Socket socket = server.accept();
-                try {
-                    serverList.add(new ServerHandler(socket));
-                } catch (IOException e) {
-                    socket.close();
-                }
+    public Server(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
+    }
+
+    public void startServer() {
+        try {
+            while (!serverSocket.isClosed()) {
+                Socket socket = serverSocket.accept();
+                System.out.println("Присоединился новый пользователь");
+                ClientHandler clientHandler = new ClientHandler(socket);
+
+                Thread thread = new Thread(clientHandler);
+                thread.start();
             }
+        } catch (IOException e) {
+
         }
     }
+
+    public void closeServerSocket() {
+        try {
+            if (serverSocket != null) {
+                serverSocket.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        ServerSocket serverSocket = new ServerSocket(1234);
+        Server server = new Server(serverSocket);
+        server.startServer();
+    }
+
 }
