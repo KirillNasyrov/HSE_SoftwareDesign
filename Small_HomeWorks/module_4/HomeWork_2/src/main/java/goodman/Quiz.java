@@ -48,7 +48,7 @@ public class Quiz {
                 }
             } else {
                 try {
-                    List<QuestionCategory> categories = quizHttpClient.getCategories(3);
+                    List<QuestionCategory> categories = quizHttpClient.getCategories(consoleHandler.getNumberCategories());
                     int numberOfCategory = consoleHandler.getCategory(categories);
                     --numberOfCategory;
 
