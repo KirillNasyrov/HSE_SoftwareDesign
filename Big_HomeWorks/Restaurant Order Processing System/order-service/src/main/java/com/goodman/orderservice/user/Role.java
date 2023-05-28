@@ -1,4 +1,4 @@
-package com.goodman.authorizationservice.user;
+package com.goodman.orderservice.user;
 
 public enum Role {
     CUSTOMER,

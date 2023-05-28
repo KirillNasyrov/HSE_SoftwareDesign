@@ -1,4 +1,4 @@
-package com.goodman.authorizationservice.config;
+package com.goodman.orderservice.jwtValidationFilter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -18,9 +18,9 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtValidationFilter extends OncePerRequestFilter {
 
-    private final JwtService jwtService;
+    private final JwtValidationService jwtValidationService;
     private final UserDetailsService userDetailsService;
     @Override
     protected void doFilterInternal(
@@ -36,10 +36,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         jwt = authHeader.substring(7);
-        userEmail = jwtService.extractEmail(jwt);
+        userEmail = jwtValidationService.extractEmail(jwt);
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-            if (jwtService.isTokenValid(jwt, userDetails)) {
+            if (jwtValidationService.isTokenValid(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
