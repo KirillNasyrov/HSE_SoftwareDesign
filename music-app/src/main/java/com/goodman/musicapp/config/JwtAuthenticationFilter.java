@@ -1,4 +1,4 @@
-package com.goodman.authorizationservice.config;
+package com.goodman.musicapp.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

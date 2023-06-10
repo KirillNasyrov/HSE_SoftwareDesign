@@ -1,6 +1,5 @@
-package com.goodman.authorizationservice.service;
+package com.goodman.musicapp.service;
 
-import com.goodman.authorizationservice.user.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InfoResponse {
-    Role role;
     String name;
     String email;
 }

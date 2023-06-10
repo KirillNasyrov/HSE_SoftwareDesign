@@ -1,6 +1,6 @@
-package com.goodman.authorizationservice.config;
+package com.goodman.musicapp.config;
 
-import com.goodman.authorizationservice.user.UserRepository;
+import com.goodman.musicapp.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;

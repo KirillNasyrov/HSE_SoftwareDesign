@@ -1,4 +1,4 @@
-package com.goodman.authorizationservice.auth;
+package com.goodman.musicapp.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

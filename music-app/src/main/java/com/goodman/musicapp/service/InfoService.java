@@ -1,8 +1,8 @@
-package com.goodman.authorizationservice.service;
+package com.goodman.musicapp.service;
 
-import com.goodman.authorizationservice.config.JwtService;
-import com.goodman.authorizationservice.user.User;
-import com.goodman.authorizationservice.user.UserRepository;
+import com.goodman.musicapp.config.JwtService;
+import com.goodman.musicapp.user.User;
+import com.goodman.musicapp.user.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,6 @@ public class InfoService {
         User user = userRepository.findByEmail(userEmail).get();
 
         return InfoResponse.builder()
-                .role(user.getRole())
                 .name(user.getUsername())
                 .email(userEmail)
                 .build();

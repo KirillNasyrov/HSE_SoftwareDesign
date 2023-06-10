@@ -1,9 +1,8 @@
-package com.goodman.authorizationservice.auth;
+package com.goodman.musicapp.auth;
 
-import com.goodman.authorizationservice.config.JwtService;
-import com.goodman.authorizationservice.user.Role;
-import com.goodman.authorizationservice.user.User;
-import com.goodman.authorizationservice.user.UserRepository;
+import com.goodman.musicapp.config.JwtService;
+import com.goodman.musicapp.user.User;
+import com.goodman.musicapp.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,7 +25,6 @@ public class AuthenticationService {
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.CUSTOMER)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();

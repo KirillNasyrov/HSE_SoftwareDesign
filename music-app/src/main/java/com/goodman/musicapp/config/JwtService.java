@@ -1,6 +1,6 @@
-package com.goodman.authorizationservice.config;
+package com.goodman.musicapp.config;
 
-import com.goodman.authorizationservice.user.User;
+import com.goodman.musicapp.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

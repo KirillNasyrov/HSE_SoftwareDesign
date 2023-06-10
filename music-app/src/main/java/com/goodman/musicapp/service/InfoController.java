@@ -1,4 +1,4 @@
-package com.goodman.authorizationservice.service;
+package com.goodman.musicapp.service;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.NonNull;

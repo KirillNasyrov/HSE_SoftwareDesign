@@ -1,4 +1,4 @@
-package com.goodman.authorizationservice.user;
+package com.goodman.musicapp.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
